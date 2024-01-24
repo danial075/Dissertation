@@ -13,10 +13,14 @@ class Controller {
     }
 
     handleGetData() {
-        const startDate = this.getStartDate();
-        const endDate = this.getEndDate()
 
-        this.model.getDataFromAPI(startDate, endDate).then(data => {
+        const startDate = this.getStartDate();
+        const endDate = this.getEndDate();
+        const pageType = document.body.getAttribute('data-page-type');
+
+
+
+        this.model.getDataFromAPI(startDate, endDate, pageType).then(data => {
             const graphData = this.model.convertToGraphData(data);
             const geoJSONData = this.model.convertToGeoJSON(data);
             this.view.createGraph(graphData);

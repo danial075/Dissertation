@@ -2,9 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Title</title>
+  <title>Glasgow Pedestrian Data</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
   <!-- Link to Leaflet CSS -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" crossorigin=""/>
   <!-- Link to Leaflet JavaScript -->
   <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" crossorigin=""></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -17,9 +18,7 @@
   <!--    <input type="date" id="startDate2" name="startDate2">-->
   <!--    <input type="date" id="endDate2" name="endDate2">-->
 
-  <input type="date" id="startDate" name="startDate">
-  <input type="date" id="endDate" name="endDate">
-  <button id="submitButton">Get Data</button>
+
 
   <style>
     #glasgowMap {
@@ -34,10 +33,15 @@
   </style>
 
 </head>
-<body>
+
+<body class = "cream-background" data-page-type="pedestrian">
+<input type="date" id="startDate" name="startDate">
+<input type="date" id="endDate" name="endDate">
+
+<button id="submitButton">Get Data</button>
 <canvas id="glasgowGraph"></canvas>
-<button id="imageButton">Download Image</button>
-<button id="pdfButton">PDF download</button>
+<button id="imageButton" hidden>Download Image</button>
+<button id="pdfButton" hidden>PDF download</button>
 
 <div id="glasgowMap"></div>
 <script src="Model.js"></script>

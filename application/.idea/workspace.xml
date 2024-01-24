@@ -4,11 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a3a5859f-ef29-4d20-b8f2-44460dabe573" name="Changes" comment="refactored code to a mvc structure properly with classes and finished map and chart">
-      <change afterPath="$PROJECT_DIR$/Pedestrian.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+    <list default="true" id="a3a5859f-ef29-4d20-b8f2-44460dabe573" name="Changes" comment="Have completed project presentation and script. Have made a homepage as well.">
+      <change afterPath="$PROJECT_DIR$/Cyclist.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Projectpresenation/Script.docx" beforeDir="false" afterPath="$PROJECT_DIR$/../Projectpresenation/Script.docx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Projectpresenation/background.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Projectpresenation/dissertationpresentation.pptx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/Controller.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model.js" beforeDir="false" afterPath="$PROJECT_DIR$/Model.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pedestrian.html" beforeDir="false" afterPath="$PROJECT_DIR$/Pedestrian.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application.iml" beforeDir="false" afterPath="$PROJECT_DIR$/application.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../projectprogressreport1.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../script.docx" beforeDir="false" afterPath="$PROJECT_DIR$/../script.docx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,6 +56,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/danialsheikh/Documents/Uni/4th-year/dissertation/application/.idea&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -53,6 +64,11 @@
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.editor&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/.idea" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -75,7 +91,18 @@
       <workItem from="1703698845011" duration="2779000" />
       <workItem from="1703766533340" duration="22914000" />
       <workItem from="1704717974962" duration="738000" />
-      <workItem from="1704736226840" duration="802000" />
+      <workItem from="1704736226840" duration="1086000" />
+      <workItem from="1704832252206" duration="1000" />
+      <workItem from="1704832261526" duration="27000" />
+      <workItem from="1704832300342" duration="5484000" />
+      <workItem from="1704900870796" duration="15700000" />
+      <workItem from="1704974221931" duration="327000" />
+      <workItem from="1705344520685" duration="1577000" />
+      <workItem from="1705411760051" duration="6620000" />
+      <workItem from="1705596425984" duration="13261000" />
+      <workItem from="1705944655833" duration="7477000" />
+      <workItem from="1706039192005" duration="2000" />
+      <workItem from="1706096647248" duration="3363000" />
     </task>
     <task id="LOCAL-00001" summary="refactored code to a mvc structure properly with classes and finished map and chart">
       <created>1704032096111</created>
@@ -84,7 +111,14 @@
       <option name="project" value="LOCAL" />
       <updated>1704032096111</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Have completed project presentation and script. Have made a homepage as well.">
+      <created>1704737643162</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1704737643162</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -103,6 +137,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="refactored code to a mvc structure properly with classes and finished map and chart" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactored code to a mvc structure properly with classes and finished map and chart" />
+    <MESSAGE value="Have completed project presentation and script. Have made a homepage as well." />
+    <option name="LAST_COMMIT_MESSAGE" value="Have completed project presentation and script. Have made a homepage as well." />
   </component>
 </project>
