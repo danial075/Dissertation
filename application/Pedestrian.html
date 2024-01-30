@@ -1,40 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Glasgow Pedestrian Data</title>
-  <link rel="stylesheet" type="text/css" href="style.css">
-  <!-- Link to Leaflet CSS -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" crossorigin=""/>
-  <!-- Link to Leaflet JavaScript -->
-  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" crossorigin=""></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <meta charset="UTF-8">
+    <title>Glasgow Pedestrian Data</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <!-- Link to Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" crossorigin=""/>
+    <!-- Link to Leaflet JavaScript -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" crossorigin=""></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
 
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.debug.js"></script>
-
-  <!--    <button id = compareButton>Compare two sets of data</button>-->
-  <!--    <input type="date" id="startDate2" name="startDate2">-->
-  <!--    <input type="date" id="endDate2" name="endDate2">-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.debug.js"></script>
 
 
+    <style>
+        #glasgowMap {
+            height: 400px
+        }
 
-  <style>
-    #glasgowMap {
-      height: 400px
-    }
-  </style>
-  <style>
-    #glasgowGraph {
-      height: 700px !important;
+        #glasgowGraph {
+            height: 700px !important;
 
-    }
-  </style>
+        }
+    </style>
 
 </head>
 
-<body class = "cream-background" data-page-type="pedestrian">
+<body class="cream-background" data-page-type="pedestrian">
 <input type="date" id="startDate" name="startDate">
 <input type="date" id="endDate" name="endDate">
 
@@ -42,6 +36,7 @@
 <canvas id="glasgowGraph"></canvas>
 <button id="imageButton" hidden>Download Image</button>
 <button id="pdfButton" hidden>PDF download</button>
+
 
 <div id="glasgowMap"></div>
 <script src="Model.js"></script>

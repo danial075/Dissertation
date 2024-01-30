@@ -4,21 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a3a5859f-ef29-4d20-b8f2-44460dabe573" name="Changes" comment="Have completed project presentation and script. Have made a homepage as well.">
-      <change afterPath="$PROJECT_DIR$/Cyclist.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Projectpresenation/Script.docx" beforeDir="false" afterPath="$PROJECT_DIR$/../Projectpresenation/Script.docx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Projectpresenation/background.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Projectpresenation/dissertationpresentation.pptx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
+    <list default="true" id="a3a5859f-ef29-4d20-b8f2-44460dabe573" name="Changes" comment="&quot;Getting and sorted the cyclist data&quot;">
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/Controller.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Cyclist.html" beforeDir="false" afterPath="$PROJECT_DIR$/Cyclist.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Model.js" beforeDir="false" afterPath="$PROJECT_DIR$/Model.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Pedestrian.html" beforeDir="false" afterPath="$PROJECT_DIR$/Pedestrian.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application.iml" beforeDir="false" afterPath="$PROJECT_DIR$/application.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/View.js" beforeDir="false" afterPath="$PROJECT_DIR$/View.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../projectprogressreport1.docx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../script.docx" beforeDir="false" afterPath="$PROJECT_DIR$/../script.docx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,6 +33,9 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Model.js" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -102,7 +99,10 @@
       <workItem from="1705596425984" duration="13261000" />
       <workItem from="1705944655833" duration="7477000" />
       <workItem from="1706039192005" duration="2000" />
-      <workItem from="1706096647248" duration="3363000" />
+      <workItem from="1706096647248" duration="5865000" />
+      <workItem from="1706195099048" duration="251000" />
+      <workItem from="1706198593154" duration="5407000" />
+      <workItem from="1706288209293" duration="35813000" />
     </task>
     <task id="LOCAL-00001" summary="refactored code to a mvc structure properly with classes and finished map and chart">
       <created>1704032096111</created>
@@ -118,7 +118,14 @@
       <option name="project" value="LOCAL" />
       <updated>1704737643162</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="&quot;Getting and sorted the cyclist data&quot;">
+      <created>1706106601061</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1706106601061</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -138,6 +145,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="refactored code to a mvc structure properly with classes and finished map and chart" />
     <MESSAGE value="Have completed project presentation and script. Have made a homepage as well." />
-    <option name="LAST_COMMIT_MESSAGE" value="Have completed project presentation and script. Have made a homepage as well." />
+    <MESSAGE value="&quot;Getting and sorted the cyclist data&quot;" />
+    <option name="LAST_COMMIT_MESSAGE" value="&quot;Getting and sorted the cyclist data&quot;" />
   </component>
 </project>

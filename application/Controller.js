@@ -19,12 +19,12 @@ class Controller {
         const pageType = document.body.getAttribute('data-page-type');
 
 
-
         this.model.getDataFromAPI(startDate, endDate, pageType).then(data => {
-            const graphData = this.model.convertToGraphData(data);
-            const geoJSONData = this.model.convertToGeoJSON(data);
-            this.view.createGraph(graphData);
-            this.view.createMap(geoJSONData);
+            const graphData = this.model.convertToGraphData(data, pageType);
+            const geoJSONData = this.model.convertToGeoJSON(data, pageType);
+            this.view.createGraph(graphData, pageType);
+            this.view.createMap(geoJSONData, pageType);
+            this.showDownloadButtons();
         }).catch(error => {
             console.error('Error fetching/handling data', error);
         });
@@ -36,6 +36,12 @@ class Controller {
 
     getEndDate() {
         return document.getElementById('endDate').value;
+    }
+
+    showDownloadButtons() {
+        document.getElementById('imageButton').style.display = "block";
+        document.getElementById('pdfButton').style.display = "block";
+
     }
 
 

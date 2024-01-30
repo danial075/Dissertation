@@ -1,6 +1,6 @@
 class Model {
 
-
+// This function gets the data from the Pedestrian and Cyclist API
     async getDataFromAPI(startDate, endDate, dataType) {
         let url;
         let data;
@@ -17,99 +17,117 @@ class Model {
             if (!response.ok) {
                 throw new Error('API request did not go through')
             }
+
             data = await response.json();
 
             if (dataType === 'cyclist') {
-                data = await this.filterCyclistSensorAPI(data);
+                data = await this.LocationToCyclistData(data);
             }
-
             return data;
+
 
         } catch (err) {
             console.error('Fetch error:', err);
         }
     }
 
-    async filterCyclistSensorAPI(cyclistData) {
-        // Define the URL for the sensor location data
-        let urlSensorLocation = `https://api.glasgow.gov.uk/mobility/v1/Mobility_Sites?format=json`;
+// This function adds the location and coordinates to the cyclist data
+    async LocationToCyclistData(unsortedData) {
+        let url = `https://api.glasgow.gov.uk/mobility/v1/Mobility_Sites?format=json`;
 
         try {
-            // Fetch the sensor location data from the API
-            const response = await fetch(urlSensorLocation, {method: `GET`});
-            // Check if the API request was successful
+            const response = await fetch(url, {method: `GET`});
+
+            // Check if the request was successful
             if (!response.ok) {
-                throw new Error('API request did not go through');
+                throw new Error('API request did not go through;');
             }
-            // Parse the JSON response to get sensor data
             const sensorData = await response.json();
 
             // Transform the sensor data array into a lookup object (map)
             const sensorLookup = sensorData.reduce((acc, sensor) => {
-                // Map each sensor's id to its corresponding data for easy access
                 acc[sensor.id] = {
                     name: sensor.name,
                     latitude: sensor.lat,
                     longitude: sensor.long
                 };
-                return acc; // Return the updated map
-            }, {}); // Start with an empty object
-
-            const aggregatedCounts = {};
-
-            cyclistData.forEach(item => {
+                return acc;
+            })
+            // Then use the sensor map to get the site id and add its location
+            const updateCyclists = unsortedData.map(item => {
                 const sensorInfo = sensorLookup[item.siteId];
-                const bicycleData = item.crossingCountPerTimeInterval.find(interval => interval.class === 'bicycle');
-                const count = bicycleData ? bicycleData.count : 0;
-
-                // Create a unique key for each day and location
-                const key = `${sensorInfo.latitude}-${sensorInfo.longitude}`;
-
-                if (!aggregatedCounts[key]) {
-                    aggregatedCounts[key] = {
+                if (sensorInfo) {
+                    return {
+                        ...item,
                         sensorName: sensorInfo.name,
                         sensorLatitude: sensorInfo.latitude,
-                        sensorLongitude: sensorInfo.longitude,
-                        periodKey: item.periodKey,
-                        count: 0
+                        sensorLongitude: sensorInfo.longitude
                     };
                 }
-                aggregatedCounts[key].count += count;
+                return item;
 
             });
-            // Convert the aggregated data into an array for return
-            const resultArray = Object.values(aggregatedCounts);
-
-            return resultArray;
-
+            return updateCyclists;
         } catch (err) {
-            console.error('Fetch error:', err);
-            return []; // Return an empty array as a fallback
+            console.error('fetch error:', err);
+            return [];
         }
     }
 
-
+// This function aggregates the count for the pedestrian and cyclists along with the corresponding location
     convertToGraphData(data, dataType) {
-        const streetData = {}
-        if (dataType === 'pedestrian') {
 
+        const streetData = {}
+
+        if (dataType === 'pedestrian') {
             data.forEach(item => {
+                if (!item.location || typeof item.location.description === 'undefined') {
+                    return; // Skip this iteration if location or description is not defined
+                }
                 const street = item.location.description;
                 const key = street;
+                console.log(street);
 
-                if (!streetData[key]) {
-                    // If the street-month key doesn't exist, create it with initial values
-                    streetData[key] = {
-                        pedestrianCount: 0,
+                if (item.pedestrianCount > 0) {
+                    if (!streetData[key]) {
+                        // If the street-month key doesn't exist, create it with initial values
+                        streetData[key] = {
+                            pedestrianCount: 0,
 
-                    };
+                        };
+                    }
                 }
 
                 // Aggregate the pedestrian counts for the street-month key
                 streetData[key].pedestrianCount += item.pedestrianCount;
-            })
-            console.log(streetData);
+                console.log("here")
+            });
 
+
+        }
+        if (dataType === 'cyclist') {
+
+            data.forEach(item => {
+                // Assuming 'sensorName' is the street name and 'count' is within the 'crossingCountPerTimeInterval' array
+                const street = item.sensorName; // Or however you extract the street name
+                const counts = item.crossingCountPerTimeInterval; // This is an array of counts
+
+                counts.forEach(countItem => {
+                    if (countItem.count > 0) {
+                        const key = street;
+
+                        if (!streetData[key]) {
+                            streetData[key] = {
+                                cyclistCount: 0,
+                            };
+                        }
+
+
+                        // Add the count to the street's cyclist count
+                        streetData[key].cyclistCount += countItem.count;
+                    }
+                });
+            });
         }
 
         return streetData;
@@ -117,58 +135,122 @@ class Model {
 
     }
 
-
-    convertToGeoJSON(data) {
-        // Create an object to hold the aggregated data by street
+// This function converts the data to GeoJSON so easy to plot on the map
+    convertToGeoJSON(data, dataType) {
         const aggregatedData = {};
+        if (dataType === 'pedestrian') {
 
-        data.forEach(item => {
-            const street = item.location.description;
-            const coordinates = [item.location.longitude, item.location.latitude];
-            const date = new Date(item.processDate);
-            const day = String(date.getUTCDate()).padStart(2, '0');
-            const month = String(date.getUTCMonth() + 1).padStart(2, '0');
-            const year = date.getUTCFullYear();
-            const monthYear = `${year}-${month}-${day}`;
 
-            if (!aggregatedData[street]) {
-                // If the street key doesn't exist, create it with initial values
-                aggregatedData[street] = {
-                    pedestrianCount: 0,
-                    coordinates: coordinates,
-                    description: street,
-                    dates: [] // Array to store all dates for this street
-                };
-            }
+            data.forEach(item => {
+                const street = item.location.description;
+                const coordinates = [item.location.longitude, item.location.latitude];
+                const date = new Date(item.processDate);
+                const day = String(date.getUTCDate()).padStart(2, '0');
+                const month = String(date.getUTCMonth() + 1).padStart(2, '0');
+                const year = date.getUTCFullYear();
+                const monthYear = `${year}-${month}-${day}`;
 
-            // Aggregate the pedestrian counts for the street key
-            aggregatedData[street].pedestrianCount += item.pedestrianCount;
-            if (!aggregatedData[street].dates.includes(monthYear)) {
-                aggregatedData[street].dates.push(monthYear);
-            }
-        });
-
-        // Convert the aggregated data into an array of GeoJSON features
-        const features = Object.keys(aggregatedData).map(key => {
-            const item = aggregatedData[key];
-            return {
-                "type": "Feature",
-                "properties": {
-                    "pedestrianCount": item.pedestrianCount,
-                    "dates": item.dates.join(', '), // Join dates as a string
-                    "description": item.description
-                },
-                "geometry": {
-                    "type": "Point",
-                    "coordinates": item.coordinates
+                if (!aggregatedData[street]) {
+                    // If the street key doesn't exist, create it with initial values
+                    aggregatedData[street] = {
+                        pedestrianCount: 0,
+                        coordinates: coordinates,
+                        description: street,
+                        dates: [] // Array to store all dates for this street
+                    };
                 }
+
+                // Aggregate the pedestrian counts for the street key
+                aggregatedData[street].pedestrianCount += item.pedestrianCount;
+                if (!aggregatedData[street].dates.includes(monthYear)) {
+                    aggregatedData[street].dates.push(monthYear);
+                }
+            });
+
+            // Convert the aggregated data into an array of GeoJSON features
+            const features = Object.keys(aggregatedData).map(key => {
+                const item = aggregatedData[key];
+                return {
+                    "type": "Feature",
+                    "properties": {
+                        "pedestrianCount": item.pedestrianCount,
+                        "dates": item.dates.join(', '), // Join dates as a string
+                        "description": item.description
+                    },
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": item.coordinates
+                    }
+                };
+            });
+            return {
+                "type": "FeatureCollection",
+                "features": features
             };
-        });
-        console.log(features);
-        return {
-            "type": "FeatureCollection",
-            "features": features
-        };
+        }
+        if (dataType === 'cyclist') {
+            data.forEach(item => {
+                const street = item.sensorName;
+                const coordinates = [item.sensorLongitude, item.sensorLatitude];
+
+                if (typeof coordinates[0] === 'undefined' || typeof coordinates[0] === 'undefined') {
+                    return;
+                }
+
+                const date = new Date(item.periodKey);
+                const day = String(date.getUTCDate()).padStart(2, '0');
+                const month = String(date.getUTCMonth() + 1).padStart(2, '0');
+                const year = date.getUTCFullYear();
+                const monthYear = `${day}-${month}-${year}`;
+
+                if (!aggregatedData[street]) {
+                    aggregatedData[street] = {
+                        cyclistCount: 0,
+                        coordinates: coordinates,
+                        description: street,
+                        dates: []
+                    };
+                }
+
+                // Aggregate the pedestrian counts for the street key
+                item.crossingCountPerTimeInterval.forEach(interval => {
+                    if (interval.count > 0) {
+                        aggregatedData[street].cyclistCount += interval.count;
+                    }
+                })
+                if (!aggregatedData[street].dates.includes(monthYear)) {
+                    aggregatedData[street].dates.push(monthYear);
+                }
+            });
+
+
+            // Convert the aggregated data into an array of GeoJSON features
+            const features = Object.keys(aggregatedData).map(key => {
+                const item = aggregatedData[key];
+                return {
+                    "type": "Feature",
+                    "properties": {
+                        "cyclistCount": item.cyclistCount,
+                        "dates": item.dates.join(', '), // Join dates as a string
+                        "description": item.description
+                    },
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": item.coordinates
+
+                    }
+                };
+            });
+
+            return {
+                "type": "FeatureCollection",
+                "features": features
+            };
+
+
+        }
     }
+
+
 }
 
