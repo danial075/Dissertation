@@ -1,27 +1,24 @@
 class View {
 
+
     constructor() {
         this.map = null; // Declares the map property
         this.Graph = null; // Declares the Graph property
+        this.mapMarkers = {}; // store the markers for reference between the graph
+
+
     }
-   // This is used for debugging purposes helps when you have the error object not defined
-    printAllProperties(obj, indent = '') {
-        for (const key in obj) {
-            if (obj.hasOwnProperty(key)) {
-                console.log(indent + key + ':', obj[key]);
-                if (typeof obj[key] === 'object' && obj[key] !== null) {
-                    this.printAllProperties(obj[key], indent + '  ');
-                }
-            }
-        }
-    }
-  // This creates the interactive map and plots the points where the sensors are located
+
+
+    // This creates the interactive map and plots the points where the sensors are located
     createMap(geoJSONData, pageType) {
-        console.log(geoJSONData);
+        let checkBox = document.getElementById('hideZeroCounts');
         if (this.map !== null) {
             this.map.remove();
             this.map = null;
         }
+
+
         if (pageType === 'pedestrian') {
 
             this.map = L.map('glasgowMap').setView([55.8642, -4.2518], 13);
@@ -29,16 +26,25 @@ class View {
                 attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             }).addTo(this.map);
             L.geoJSON(geoJSONData, {
-                onEachFeature: function (feature, layer) {
-                    // console.log("Feature properties:", feature.properties); // Debugging
+                onEachFeature: (feature, layer) => {
                     if (feature.properties && feature.properties.description) {
                         let popupContent = 'Location: ' + feature.properties.description + '<br>' +
                             'Pedestrian Count: ' + feature.properties.pedestrianCount +
                             '<br>' + 'Dates Between:' + controller.getStartDate() + ' - ' + controller.getEndDate();
+                        if (feature.properties.pedestrianCount === 0 && checkBox.checked === true) {
+                            return;
+                        }
                         layer.bindPopup(popupContent).openPopup();
                     }
+
+
+                    this.mapMarkers[feature.properties.description] = layer;
                 }
+
+
             }).addTo(this.map);
+
+
         }
 
         if (pageType === 'cyclist') {
@@ -49,34 +55,46 @@ class View {
             }).addTo(this.map);
 
             L.geoJSON(geoJSONData, {
-                onEachFeature: function (feature, layer) {
+                onEachFeature: (feature, layer) => {
 
                     if (feature.properties && feature.properties.description) {
                         let popupContent = 'Location: ' + feature.properties.description + '<br>' +
                             'Cyclist Count: ' + feature.properties.cyclistCount +
                             '<br>' + 'Dates Between: ' + controller.getStartDate() + ' to ' + controller.getEndDate();
+                        if (feature.properties.cyclistCount === 0 && checkBox.checked === true) {
+                            return;
+                        }
                         layer.bindPopup(popupContent).openPopup();
+
+
                     }
+                    this.mapMarkers[feature.properties.description] = layer;
                 }
             }).addTo(this.map);
         }
 
         if (pageType === 'traffic') {
-
+            console.log('hello')
             this.map = L.map('glasgowMap').setView([55.8642, -4.2518], 13);
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             }).addTo(this.map);
 
             L.geoJSON(geoJSONData, {
-                onEachFeature: function (feature, layer) {
+                onEachFeature: (feature, layer) => {
 
                     if (feature.properties && feature.properties.description) {
-                        let popupContent =
-                            'Cyclist Count: ' + feature.properties.trafficCount +
+                        let popupContent = 'Location: ' + feature.properties.description + '<br>' +
+                            'Traffic Count: ' + feature.properties.trafficCount +
                             '<br>' + 'Dates Between: ' + controller.getStartDate() + ' to ' + controller.getEndDate();
+                        if (feature.properties.trafficCount === 0 && checkBox.checked === true) {
+                            return;
+                        }
                         layer.bindPopup(popupContent).openPopup();
+
+
                     }
+                    this.mapMarkers[feature.properties.description] = layer;
                 }
             }).addTo(this.map);
         }
@@ -84,21 +102,29 @@ class View {
 
     // This creates the interactive graph to show the data picked up from the sensors
     createGraph(graphData, dataType) {
-
+        console.log(graphData);
 
         if (this.Graph !== null) {
             this.Graph.destroy();
 
         }
         if (dataType === 'pedestrian') {
-
             const ctx = document.getElementById('glasgowGraph');
 
             // Extracting labels (street names) and data (pedestrian counts)
-            const xAxis = Object.keys(graphData);
+            let xAxis = Object.keys(graphData);
+            let yAxis = xAxis.map(x => graphData[x].pedestrianCount);
 
-            const yAxis = xAxis.map(x => graphData[x].pedestrianCount);
+            // If checkbox is checked, filter out zero counts
+            if (controller.getCheckBox().checked === true) {
+                const filteredIndices = yAxis
+                    .map((count, index) => ({count, index}))
+                    .filter(item => item.count > 0)
+                    .map(item => item.index);
 
+                xAxis = filteredIndices.map(index => xAxis[index]);
+                yAxis = filteredIndices.map(index => yAxis[index]);
+            }
 
             this.Graph = new Chart(ctx, {
 
@@ -113,24 +139,46 @@ class View {
                 },
 
                 options: {
+                    onClick: (event, elements,) => {
+                        if (elements.length) {
+                            const firstPoint = elements[0];
+                            // Corrected from firstElement to firstPoint
+                            const label = this.Graph.data.labels[firstPoint.index];
+                            const marker = this.mapMarkers[label];
+                            if (marker) {
+                                marker.openPopup();
+                                this.map.setView(marker.getLatLng(), 14); // Or any other zoom level
+                            }
+                        }
+                    },
                     scales: {
                         y: {
                             beginAtZero: true
                         }
-                    }
 
-                },
+                    },
+                }
 
             });
+
 
         }
         if (dataType === 'cyclist') {
             const ctx = document.getElementById('glasgowGraph');
 
             // Extracting labels (street names) and data (pedestrian counts)
-            const xAxis = Object.keys(graphData);
+            let xAxis = Object.keys(graphData);
 
-            const yAxis = xAxis.map(x => graphData[x].cyclistCount);
+            let yAxis = xAxis.map(x => graphData[x].cyclistCount);
+
+            if (controller.getCheckBox().checked === true) {
+                const filteredIndices = yAxis
+                    .map((count, index) => ({count, index}))
+                    .filter(item => item.count > 0)
+                    .map(item => item.index);
+                xAxis = filteredIndices.map(index => xAxis[index]);
+                yAxis = filteredIndices.map(index => yAxis[index]);
+            }
 
 
             this.Graph = new Chart(ctx, {
@@ -145,6 +193,18 @@ class View {
                 },
 
                 options: {
+                    onClick: (event, elements,) => {
+                        if (elements.length) {
+                            const firstPoint = elements[0];
+                            // Corrected from firstElement to firstPoint
+                            const label = this.Graph.data.labels[firstPoint.index];
+                            const marker = this.mapMarkers[label];
+                            if (marker) {
+                                marker.openPopup();
+                                this.map.setView(marker.getLatLng(), 14); // Or any other zoom level
+                            }
+                        }
+                    },
                     scales: {
                         y: {
                             beginAtZero: true
@@ -155,14 +215,24 @@ class View {
 
             });
 
+
         }
         if (dataType === 'traffic') {
             const ctx = document.getElementById('glasgowGraph');
 
             // Extracting labels (street names) and data (traffic counts)
-            const xAxis = Object.keys(graphData);
+            let xAxis = Object.keys(graphData);
 
-            const yAxis = xAxis.map(x => graphData[x].averageCount);
+            let yAxis = xAxis.map(x => graphData[x].averageCount);
+
+            if (controller.getCheckBox().checked === true) {
+                const filteredIndices = yAxis
+                    .map((count, index) => ({count, index}))
+                    .filter(item => item.count > 0)
+                    .map(item => item.index);
+                xAxis = filteredIndices.map(index => xAxis[index]);
+                yAxis = filteredIndices.map(index => yAxis[index]);
+            }
 
 
             this.Graph = new Chart(ctx, {
@@ -177,6 +247,18 @@ class View {
                 },
 
                 options: {
+                    onClick: (event, elements,) => {
+                        if (elements.length) {
+                            const firstPoint = elements[0];
+                            // Corrected from firstElement to firstPoint
+                            const label = this.Graph.data.labels[firstPoint.index];
+                            const marker = this.mapMarkers[label];
+                            if (marker) {
+                                marker.openPopup();
+                                this.map.setView(marker.getLatLng(), 14); // Or any other zoom level
+                            }
+                        }
+                    },
                     scales: {
                         y: {
                             beginAtZero: true
@@ -186,6 +268,7 @@ class View {
                 },
 
             });
+
 
         }
     }

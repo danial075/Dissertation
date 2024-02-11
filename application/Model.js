@@ -1,5 +1,6 @@
 class Model {
 
+
 // This function gets the data from the Pedestrian and Cyclist API
     async getDataFromAPI(startDate, endDate, dataType) {
 
@@ -8,13 +9,14 @@ class Model {
         let urlPedestrian = `https://api.glasgow.gov.uk/mobility/v1/footfall/historical?format=json&startDate=${startDate}&endDate=${endDate}`;
         let urlCyclist = `https://api.glasgow.gov.uk/mobility/v1/Mobility_Measurements?format=json&period=day&type=bicycle&date=${startDate}&end=${endDate}`
         let urlTraffic = `https://api.glasgow.gov.uk/traffic/v1/movement/query?start=${startDate}&end=${endDate}&period=Day`;
+
         if (dataType === 'pedestrian') {
             url = urlPedestrian;
         }
         if (dataType === 'cyclist') {
             url = urlCyclist;
         }
-        if(dataType === 'traffic') {
+        if (dataType === 'traffic') {
             url = urlTraffic
         }
         try {
@@ -25,18 +27,13 @@ class Model {
             data = await response.json();
 
             if (dataType === 'cyclist') {
-                data = await this.LocationToCyclistData(data,dataType);
+                data = await this.LocationToCyclistData(data, dataType);
             }
-            if(dataType === 'traffic') {
-                data = await this.LocationToCyclistData(data,dataType);
+            if (dataType === 'traffic') {
+                data = await this.LocationToCyclistData(data, dataType);
 
             }
-            // console.log(data)
             return data;
-
-
-
-
 
 
         } catch (err) {
@@ -45,77 +42,76 @@ class Model {
     }
 
 // This function adds the location and coordinates to the cyclist data
-    async LocationToCyclistData(unsortedData,dataType) {
-       if(dataType === 'cyclist') {
-           let url = `https://api.glasgow.gov.uk/mobility/v1/Mobility_Sites?format=json`;
+    async LocationToCyclistData(unsortedData, dataType) {
+        if (dataType === 'cyclist') {
+            let url = `https://api.glasgow.gov.uk/mobility/v1/Mobility_Sites?format=json`;
 
-           try {
-               const response = await fetch(url, {method: `GET`});
+            try {
+                const response = await fetch(url, {method: `GET`});
 
-               // Check if the request was successful
-               if (!response.ok) {
-                   throw new Error('API request did not go through;');
-               }
-               const sensorData = await response.json();
+                // Check if the request was successful
+                if (!response.ok) {
+                    throw new Error('API request did not go through;');
+                }
+                const sensorData = await response.json();
 
-               // Transform the sensor data array into a lookup object (map)
-               const sensorLookup = sensorData.reduce((acc, sensor) => {
-                   acc[sensor.id] = {
-                       name: sensor.name,
-                       latitude: sensor.lat,
-                       longitude: sensor.long
-                   };
-                   return acc;
-               })
-               // Then use the sensor map to get the site id and add its location
-               const updateCyclists = unsortedData.map(item => {
-                   const sensorInfo = sensorLookup[item.siteId];
-                   if (sensorInfo) {
-                       return {
-                           ...item,
-                           sensorName: sensorInfo.name,
-                           sensorLatitude: sensorInfo.latitude,
-                           sensorLongitude: sensorInfo.longitude
-                       };
-                   }
-                   return item;
+                // Transform the sensor data array into a lookup object (map)
+                const sensorLookup = sensorData.reduce((acc, sensor) => {
+                    acc[sensor.id] = {
+                        name: sensor.name,
+                        latitude: sensor.lat,
+                        longitude: sensor.long
+                    };
+                    return acc;
+                })
+                // Then use the sensor map to get the site id and add its location
+                const updateCyclists = unsortedData.map(item => {
+                    const sensorInfo = sensorLookup[item.siteId];
+                    if (sensorInfo) {
+                        return {
+                            ...item,
+                            sensorName: sensorInfo.name,
+                            sensorLatitude: sensorInfo.latitude,
+                            sensorLongitude: sensorInfo.longitude
+                        };
+                    }
+                    return item;
 
-               });
-               return updateCyclists;
-           } catch (err) {
-               console.error('fetch error:', err);
-               return [];
-           }
-       }
-       if(dataType === 'traffic') {
-           let url = `https://api.glasgow.gov.uk/traffic/v1/movement/sites`;
-           try {
-               const response = await fetch(url, {method: `GET`});
+                });
+                return updateCyclists;
+            } catch (err) {
+                console.error('fetch error:', err);
+                return [];
+            }
+        }
+        if (dataType === 'traffic') {
+            let url = `https://api.glasgow.gov.uk/traffic/v1/movement/sites`;
+            try {
+                const response = await fetch(url, {method: `GET`});
 
-               // Check if the request was successful
-               if (!response.ok) {
-                   throw new Error('API request did not go through;');
-               }
-               const sensorData = await response.json();
-               // Transform the sensor data array into a lookup object (map)
-               const sensorLookup = sensorData.slice(1).reduce((acc, sensor) => {
-                   acc[sensor.siteId] = {
-                       name: sensor.from.description
-                   };
-                   return acc;
-               });
-               const updatedTraffic = unsortedData.map(item => {
-                   const description = sensorLookup[item.meta.siteId].name;
-                   return{... item, description};
-               });
-               return updatedTraffic;
+                // Check if the request was successful
+                if (!response.ok) {
+                    throw new Error('API request did not go through;');
+                }
+                const sensorData = await response.json();
+                // Transform the sensor data array into a lookup object (map)
+                const sensorLookup = sensorData.slice(1).reduce((acc, sensor) => {
+                    acc[sensor.siteId] = {
+                        name: sensor.from.description
+                    };
+                    return acc;
+                });
+                const updatedTraffic = unsortedData.map(item => {
+                    const description = sensorLookup[item.meta.siteId].name;
+                    return {...item, description};
+                });
+                return updatedTraffic;
 
-           }
-       catch (err) {
-           console.error('fetch error:', err);
-           return [];
-           }
-       }
+            } catch (err) {
+                console.error('fetch error:', err);
+                return [];
+            }
+        }
     }
 
 // This function aggregates the count for the pedestrian and cyclists along with the corresponding location
@@ -125,23 +121,24 @@ class Model {
 
         if (dataType === 'pedestrian') {
             data.forEach(item => {
-                if (!item.location || typeof item.location.description === 'undefined' || typeof item.pedestrianCount === 'undefined') {
+                if (!item.location || typeof item.location.description === 'undefined' || typeof item.pedestrianCount === 'undefined' || item.pedestrianCount === null) {
                     return; // Skip this iteration if location or description is not defined
                 }
+
                 const street = item.location.description;
                 const key = street;
 
 
-                if (item.pedestrianCount > 0) {
-                    if (!streetData[key]) {
-                        // If the street-month key doesn't exist, create it with initial values
-                        streetData[key] = {
-                            pedestrianCount: 0,
+                // if (item.pedestrianCount > 0) {
+                if (!streetData[key]) {
+                    // If the street-month key doesn't exist, create it with initial values
+                    streetData[key] = {
+                        pedestrianCount: 0,
 
-                        };
-                    }
+                    };
                 }
-
+                // }
+                console.log(item);
                 // Aggregate the pedestrian counts for the street-month key
                 streetData[key].pedestrianCount += item.pedestrianCount;
 
@@ -157,14 +154,14 @@ class Model {
                 const counts = item.crossingCountPerTimeInterval; // This is an array of counts
 
                 counts.forEach(countItem => {
-                    if (countItem.count > 0) {
-                        const key = street;
+                    // if (countItem.count > 0) {
+                    const key = street;
 
-                        if (!streetData[key]) {
-                            streetData[key] = {
-                                cyclistCount: 0,
-                            };
-                        }
+                    if (!streetData[key]) {
+                        streetData[key] = {
+                            cyclistCount: 0,
+                        };
+                        // }
 
 
                         // Add the count to the street's cyclist count
@@ -173,13 +170,13 @@ class Model {
                 });
             });
         }
-        if(dataType === 'traffic') {
+        if (dataType === 'traffic') {
             data.forEach(item => {
                 const street = item.description; // street name of sensor
                 const counts = item.history.averages // This is an array of averages/counts
 
                 if (!streetData[street]) {
-                    streetData[street] = { averageCount: 0 };
+                    streetData[street] = {averageCount: 0};
                 }
                 const sumOfCounts = counts.reduce((sum, current) => sum + current.value, 0);
                 streetData[street].averageCount += sumOfCounts;
@@ -187,14 +184,13 @@ class Model {
             });
 
         }
-
         return streetData;
 
 
     }
 
 // This function converts the data to GeoJSON so easy to plot on the map
-    convertToGeoJSON(data, dataType,startDate) {
+    convertToGeoJSON(data, dataType,) {
         const aggregatedData = {};
         if (dataType === 'pedestrian') {
 

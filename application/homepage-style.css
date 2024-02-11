@@ -1,13 +1,13 @@
-/*.nav-link {*/
-/*    color:green !important;*/
-/*}*/
-.navbar-brand.active {
+.nav-link.active {
     background-color: aquamarine !important;
     color: black !important;
     border-radius: 0px !important;
 
 }
-.navbar-brand:hover {
+.nav-link:hover {
     background-color: rgba(164,245,218,0.6);
     border-radius: 0px;
 }
+
+
+

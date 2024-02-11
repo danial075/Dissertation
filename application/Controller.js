@@ -7,10 +7,20 @@ class Controller {
     }
 
     setupEventListeners() {
+
         document.getElementById('submitButton').addEventListener('click', () => this.handleGetData());
         document.getElementById('imageButton').addEventListener('click', () => this.view.downloadImage());
         document.getElementById('pdfButton').addEventListener('click', () => this.view.downloadPDF());
+        document.getElementById('hideZeroCounts').addEventListener('change', () => this.handleCheckboxChange());
+
     }
+
+    handleCheckboxChange() {
+        // Here, you call the methods to create the map and graph again with the updated checkbox state
+        // It's important to have the updated data that's why we call handleGetData again
+        this.handleGetData();
+    }
+
 
     handleGetData() {
 
@@ -37,6 +47,11 @@ class Controller {
     getEndDate() {
         return document.getElementById('endDate').value;
     }
+
+    getCheckBox() {
+        return document.getElementById('hideZeroCounts');
+    }
+
 
     showDownloadButtons() {
         document.getElementById('imageButton').style.display = "block";
