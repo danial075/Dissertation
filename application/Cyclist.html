@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Traffic </title>
+    <title>Cyclist </title>
     <link rel="stylesheet" type="text/css" href="style.css">
     <!-- Link to Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" crossorigin=""/>
@@ -34,7 +34,7 @@
 
 </head>
 
-<body class="cream-background" data-page-type="cyclist">
+<body data-page-type="cyclist">
 
 <!-- Navigation bar for homepage -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -70,22 +70,44 @@
     </div>
 </nav>
 
+<div class="container-fluid text-center text-success">
+
+    <h1>Welcome to the Cyclist page. </h1>
+
+    <p1>This page shows the traffic movement in Glasgow for certain locations using the data
+        and sensors from Glasgow open data hub. Please input the two dates from when you want to view the date. Please
+        note the earliest date you can enter 23rd February 2016 and the latest being the current date when you are on
+        the
+        page.
+    </p1>
+</div>
 
 
-<h1>Welcome to the Cyclist page. This page shows the traffic movement in Glasgow for certain locations using the data
-    and sensors from Glasgow open data hub. Please input the two dates from when you want to view the date. Please
-    note the earliest date you can enter 23rd February 2016 and the latest being the current date when you are on the
-    page.
+<form id="settingDateParameters">
+    <div class="col-12">
+        <label for="startDate" class="form-label">Start Date</label>
+        <input type="date" class="form-control" id="startDate" placeholder="start date" min="2016-02-23" required>
+    </div>
+    <div class="col-12">
+        <label for="endDate" class="form-label">End Date</label>
+        <input type="date" class="form-control" id="endDate" placeholder="end date" required>
+    </div>
 
-</h1>
 
-<input type="date" id="startDate" name="startDate">
-<input type="date" id="endDate" name="endDate">
-<label><input type="checkbox" id="hideZeroCounts"> Hide Zero Counts </label>
-<button class="btn btn-success" id="submitButton">Get Data
-    <span id="loadingSpinner" class="spinner-border spinner-border-sm ms-2 d-none" role="status"
-          aria-hidden="true"></span>
-</button>
+    <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" id="hideZeroCounts" disabled>
+        <label class="form-check-label" for="hideZeroCounts">Hide Zero Counts</label>
+    </div>
+
+    <button class="btn btn-success" id="submitButton">
+        <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+        <span class="visually-hidden">Loading...</span>
+        Get Data
+    </button>
+
+
+</form>
+
 
 <canvas id="glasgowGraph"></canvas>
 <button id="imageButton" hidden>Download Image</button>

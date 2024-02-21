@@ -27,6 +27,9 @@ class View {
             }).addTo(this.map);
             L.geoJSON(geoJSONData, {
                 onEachFeature: (feature, layer) => {
+                    if (feature.properties.pedestrianCount === 0 && checkBox.checked === true) {
+                        return;
+                    }
                     if (feature.properties && feature.properties.description) {
                         let popupContent = 'Location: ' + feature.properties.description + '<br>' +
                             'Pedestrian Count: ' + feature.properties.pedestrianCount +
@@ -48,7 +51,6 @@ class View {
         }
 
         if (pageType === 'cyclist') {
-
             this.map = L.map('glasgowMap').setView([55.8642, -4.2518], 13);
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -56,22 +58,27 @@ class View {
 
             L.geoJSON(geoJSONData, {
                 onEachFeature: (feature, layer) => {
+                    if (feature.properties.cyclistCount === 0 && checkBox.checked === true) {
+                        return;
+                    }
 
+                    // Proceed if the feature has properties and a description
                     if (feature.properties && feature.properties.description) {
                         let popupContent = 'Location: ' + feature.properties.description + '<br>' +
                             'Cyclist Count: ' + feature.properties.cyclistCount +
                             '<br>' + 'Dates Between: ' + controller.getStartDate() + ' to ' + controller.getEndDate();
-                        if (feature.properties.cyclistCount === 0 && checkBox.checked === true) {
-                            return;
-                        }
-                        layer.bindPopup(popupContent).openPopup();
-
-
+                        layer.bindPopup(popupContent);
+                        layer.addTo(this.map); // Add the layer to the map if not skipping
+                        this.mapMarkers[feature.properties.description] = layer; // Store the reference if not skipping
                     }
-                    this.mapMarkers[feature.properties.description] = layer;
+
                 }
+
+
             }).addTo(this.map);
+
         }
+
 
         if (pageType === 'traffic') {
             console.log('hello')
@@ -82,14 +89,13 @@ class View {
 
             L.geoJSON(geoJSONData, {
                 onEachFeature: (feature, layer) => {
-
+                    if (feature.properties.trafficCount === 0 && checkBox.checked === true) {
+                        return;
+                    }
                     if (feature.properties && feature.properties.description) {
                         let popupContent = 'Location: ' + feature.properties.description + '<br>' +
                             'Traffic Count: ' + feature.properties.trafficCount +
                             '<br>' + 'Dates Between: ' + controller.getStartDate() + ' to ' + controller.getEndDate();
-                        if (feature.properties.trafficCount === 0 && checkBox.checked === true) {
-                            return;
-                        }
                         layer.bindPopup(popupContent).openPopup();
 
 

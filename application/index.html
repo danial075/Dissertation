@@ -6,7 +6,7 @@
     <title>Glasgow Urban Mobility</title>
 
     <!-- local CSS -->
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="homepage-style.css">
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome CSS for navbar icons -->
@@ -14,7 +14,12 @@
 
 </head>
 
-<body class="cream-background">
+<body>
+<div class = "spinner-wrapper">
+<div class="spinner-border text-success" role="status">
+    <span class="visually-hidden">Loading...</span>
+</div>
+</div>
 
 <!-- Navigation bar for homepage -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -50,11 +55,21 @@
     </div>
 </nav>
 
-<div class="container text-center text-success">
+<div class="container-fluid text-center text-success my-5">
     <h1>Glasgow on the go: Visualising Urban Mobility in Glasgow</h1>
+    <p1> by Danial Sheikh</p1>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+window.addEventListener('load',() => {
+document.querySelector('.spinner-wrapper').opacity = '0';
+
+setTimeout(() => {
+document.querySelector('.spinner-wrapper').style.display = 'none';
+},200);
+});
+</script>
 
 </body>
 </html>

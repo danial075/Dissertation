@@ -4,17 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a3a5859f-ef29-4d20-b8f2-44460dabe573" name="Changes" comment="&quot;Have completed the traffic page&quot;">
-      <change afterPath="$PROJECT_DIR$/homepage-style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
+    <list default="true" id="a3a5859f-ef29-4d20-b8f2-44460dabe573" name="Changes" comment="&quot;Clean up of the html files, fixed the broken navbar, linked the map and the graph (if you click on the graph result takes you to the point in the map). Added a filter to hide the zero results.&quot;">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/Controller.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Cyclist.html" beforeDir="false" afterPath="$PROJECT_DIR$/Cyclist.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model.js" beforeDir="false" afterPath="$PROJECT_DIR$/Model.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Pedestrian.html" beforeDir="false" afterPath="$PROJECT_DIR$/Pedestrian.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Traffic.html" beforeDir="false" afterPath="$PROJECT_DIR$/Traffic.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/View.js" beforeDir="false" afterPath="$PROJECT_DIR$/View.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application.iml" beforeDir="false" afterPath="$PROJECT_DIR$/application.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/homepage-style.css" beforeDir="false" afterPath="$PROJECT_DIR$/homepage-style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/style.css" afterDir="false" />
     </list>
@@ -122,7 +119,13 @@
       <workItem from="1707306311771" duration="12105000" />
       <workItem from="1707421664735" duration="22651000" />
       <workItem from="1707651125454" duration="11380000" />
-      <workItem from="1707668006560" duration="4986000" />
+      <workItem from="1707668006560" duration="16599000" />
+      <workItem from="1707816435048" duration="2892000" />
+      <workItem from="1708011466672" duration="970000" />
+      <workItem from="1708089564090" duration="555000" />
+      <workItem from="1708187897354" duration="211000" />
+      <workItem from="1708451041687" duration="15314000" />
+      <workItem from="1708540999310" duration="182000" />
     </task>
     <task id="LOCAL-00001" summary="refactored code to a mvc structure properly with classes and finished map and chart">
       <created>1704032096111</created>
@@ -152,7 +155,14 @@
       <option name="project" value="LOCAL" />
       <updated>1707308977782</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="&quot;Clean up of the html files, fixed the broken navbar, linked the map and the graph (if you click on the graph result takes you to the point in the map). Added a filter to hide the zero results.&quot;">
+      <created>1707673583441</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1707673583441</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -174,6 +184,7 @@
     <MESSAGE value="Have completed project presentation and script. Have made a homepage as well." />
     <MESSAGE value="&quot;Getting and sorted the cyclist data&quot;" />
     <MESSAGE value="&quot;Have completed the traffic page&quot;" />
-    <option name="LAST_COMMIT_MESSAGE" value="&quot;Have completed the traffic page&quot;" />
+    <MESSAGE value="&quot;Clean up of the html files, fixed the broken navbar, linked the map and the graph (if you click on the graph result takes you to the point in the map). Added a filter to hide the zero results.&quot;" />
+    <option name="LAST_COMMIT_MESSAGE" value="&quot;Clean up of the html files, fixed the broken navbar, linked the map and the graph (if you click on the graph result takes you to the point in the map). Added a filter to hide the zero results.&quot;" />
   </component>
 </project>
