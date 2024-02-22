@@ -26,10 +26,11 @@ class View {
                 attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             }).addTo(this.map);
             L.geoJSON(geoJSONData, {
+                filter: function(feature) {
+                    return !(feature.properties.pedestrianCount === 0 && checkBox.checked);
+                },
                 onEachFeature: (feature, layer) => {
-                    if (feature.properties.pedestrianCount === 0 && checkBox.checked === true) {
-                        return;
-                    }
+
                     if (feature.properties && feature.properties.description) {
                         let popupContent = 'Location: ' + feature.properties.description + '<br>' +
                             'Pedestrian Count: ' + feature.properties.pedestrianCount +
@@ -57,6 +58,9 @@ class View {
             }).addTo(this.map);
 
             L.geoJSON(geoJSONData, {
+                filter: function(feature) {
+                    return !(feature.properties.cyclistCount === 0 && checkBox.checked);
+                },
                 onEachFeature: (feature, layer) => {
                     if (feature.properties.cyclistCount === 0 && checkBox.checked === true) {
                         return;
@@ -88,10 +92,10 @@ class View {
             }).addTo(this.map);
 
             L.geoJSON(geoJSONData, {
+                filter: function(feature) {
+                  return !(feature.properties.trafficCount === 0 && checkBox.checked);
+                },
                 onEachFeature: (feature, layer) => {
-                    if (feature.properties.trafficCount === 0 && checkBox.checked === true) {
-                        return;
-                    }
                     if (feature.properties && feature.properties.description) {
                         let popupContent = 'Location: ' + feature.properties.description + '<br>' +
                             'Traffic Count: ' + feature.properties.trafficCount +

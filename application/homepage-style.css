@@ -1,10 +1,10 @@
-.nav-link.active {
+navbar-brand.active {
     background-color: aquamarine !important;
     color: black !important;
     border-radius: 0px !important;
 
 }
-.nav-link:hover {
+.navbar-brand:hover {
     background-color: rgba(164,245,218,0.6);
     border-radius: 0px;
 }

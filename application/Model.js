@@ -33,6 +33,7 @@ class Model {
                 data = await this.LocationToCyclistData(data, dataType);
 
             }
+            console.log(data);
             return data;
 
 

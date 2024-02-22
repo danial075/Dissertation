@@ -55,6 +55,7 @@ class Controller {
 
 
         this.model.getDataFromAPI(startDate, endDate, pageType).then(data => {
+           console.log(data);
             const graphData = this.model.convertToGraphData(data, pageType);
             const geoJSONData = this.model.convertToGeoJSON(data, pageType);
             this.view.createGraph(graphData, pageType);
