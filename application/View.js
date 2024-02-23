@@ -25,8 +25,19 @@ class View {
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             }).addTo(this.map);
-            L.geoJSON(geoJSONData, {
-                filter: function(feature) {
+            let sortedFeatures = geoJSONData.features.sort((a, b) => {
+                return b.properties.pedestrianCount - a.properties.pedestrianCount;
+            });
+            // Get the selection value for the top N features
+            let selectionValue = controller.getUserFilter(); // Assuming this returns 'top-5', 'top-10', etc., or 'all'
+            if (selectionValue !== 'all') {
+                let topN = parseInt(selectionValue.replace('top-', ''), 10);
+                sortedFeatures = sortedFeatures.slice(0, topN); // Keep only the top N features
+            }
+
+
+            L.geoJSON(sortedFeatures, {
+                filter: function (feature) {
                     return !(feature.properties.pedestrianCount === 0 && checkBox.checked);
                 },
                 onEachFeature: (feature, layer) => {
@@ -57,8 +68,19 @@ class View {
                 attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             }).addTo(this.map);
 
-            L.geoJSON(geoJSONData, {
-                filter: function(feature) {
+            let sortedFeatures = geoJSONData.features.sort((a, b) => {
+                return b.properties.cyclistCount - a.properties.cyclistCount;
+            });
+
+            // Get the selection value for the top N features
+            let selectionValue = controller.getUserFilter(); // Assuming this returns 'top-5', 'top-10', etc., or 'all'
+            if (selectionValue !== 'all') {
+                let topN = parseInt(selectionValue.replace('top-', ''), 10);
+                sortedFeatures = sortedFeatures.slice(0, topN); // Keep only the top N features
+            }
+
+            L.geoJSON(sortedFeatures, {
+                filter: function (feature) {
                     return !(feature.properties.cyclistCount === 0 && checkBox.checked);
                 },
                 onEachFeature: (feature, layer) => {
@@ -85,15 +107,26 @@ class View {
 
 
         if (pageType === 'traffic') {
-            console.log('hello')
             this.map = L.map('glasgowMap').setView([55.8642, -4.2518], 13);
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             }).addTo(this.map);
 
-            L.geoJSON(geoJSONData, {
-                filter: function(feature) {
-                  return !(feature.properties.trafficCount === 0 && checkBox.checked);
+            let sortedFeatures = geoJSONData.features.sort((a, b) => {
+                return b.properties.trafficCount - a.properties.trafficCount;
+            });
+
+            // Get the selection value for the top N features
+            let selectionValue = controller.getUserFilter(); // Assuming this returns 'top-5', 'top-10', etc., or 'all'
+            if (selectionValue !== 'all') {
+                let topN = parseInt(selectionValue.replace('top-', ''), 10);
+                sortedFeatures = sortedFeatures.slice(0, topN); // Keep only the top N features
+            }
+
+
+            L.geoJSON(sortedFeatures, {
+                filter: function (feature) {
+                    return !(feature.properties.trafficCount === 0 && checkBox.checked);
                 },
                 onEachFeature: (feature, layer) => {
                     if (feature.properties && feature.properties.description) {
@@ -134,6 +167,17 @@ class View {
 
                 xAxis = filteredIndices.map(index => xAxis[index]);
                 yAxis = filteredIndices.map(index => yAxis[index]);
+            }
+
+            let selectionValue = controller.getUserFilter();
+            if (controller.getUserFilter() !== 'all') {
+                selectionValue = parseInt(selectionValue.replace('top-', ''), 10);
+                let sortedData = yAxis
+                    .map((count, index) => ({count, index}))
+                    .sort((a, b) => b.count - a.count)
+                    .slice(0, selectionValue);
+                xAxis = sortedData.map(item => xAxis[item.index]);
+                yAxis = sortedData.map(item => item.count);
             }
 
             this.Graph = new Chart(ctx, {
@@ -190,6 +234,17 @@ class View {
                 yAxis = filteredIndices.map(index => yAxis[index]);
             }
 
+            let selectionValue = controller.getUserFilter();
+            if (controller.getUserFilter() !== 'all') {
+                selectionValue = parseInt(selectionValue.replace('top-', ''), 10);
+                let sortedData = yAxis
+                    .map((count, index) => ({count, index}))
+                    .sort((a, b) => b.count - a.count)
+                    .slice(0, selectionValue);
+                xAxis = sortedData.map(item => xAxis[item.index]);
+                yAxis = sortedData.map(item => item.count);
+            }
+
 
             this.Graph = new Chart(ctx, {
                 type: 'bar',
@@ -242,6 +297,16 @@ class View {
                     .map(item => item.index);
                 xAxis = filteredIndices.map(index => xAxis[index]);
                 yAxis = filteredIndices.map(index => yAxis[index]);
+            }
+            let selectionValue = controller.getUserFilter();
+            if (controller.getUserFilter() !== 'all') {
+                selectionValue = parseInt(selectionValue.replace('top-', ''), 10);
+                let sortedData = yAxis
+                    .map((count, index) => ({count, index}))
+                    .sort((a, b) => b.count - a.count)
+                    .slice(0, selectionValue);
+                xAxis = sortedData.map(item => xAxis[item.index]);
+                yAxis = sortedData.map(item => item.count);
             }
 
 

@@ -35,6 +35,7 @@ class Controller {
         document.getElementById('imageButton').addEventListener('click', () => this.view.downloadImage());
         document.getElementById('pdfButton').addEventListener('click', () => this.view.downloadPDF());
         document.getElementById('hideZeroCounts').addEventListener('change', () => this.handleCheckboxChange());
+        document.getElementById('topResultsDropdown').addEventListener('change', () => this.handleGetData() );
 
     }
 
@@ -81,6 +82,10 @@ class Controller {
 
     getCheckBox() {
         return document.getElementById('hideZeroCounts');
+    }
+
+    getUserFilter() {
+        return document.getElementById('topResultsDropdown').value;
     }
 
 

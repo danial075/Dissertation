@@ -99,6 +99,17 @@
         <label class="form-check-label" for="hideZeroCounts">Hide Zero Counts</label>
     </div>
 
+    <div class="selectBox">
+        <select class="form-select form-select-lg mb-3 btn-success" id="topResultsDropdown" aria-label=".form-select-lg example" >
+            <option value="top-5">Top 5</option>
+            <option value="top-10">Top 10</option>
+            <option value="top-15">Top 15</option>
+            <option value="top-20">Top 20</option>
+            <option value="all" selected>All</option>
+        </select>
+    </div>
+
+
     <button class="btn btn-success" id="submitButton">
         <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
         <span class="visually-hidden">Loading...</span>

@@ -4,12 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a3a5859f-ef29-4d20-b8f2-44460dabe573" name="Changes" comment="&quot;added a loading spinner for the pages and the for the submit button when fetching data&quot;">
+    <list default="true" id="a3a5859f-ef29-4d20-b8f2-44460dabe573" name="Changes" comment="&quot;Fixed the filter zero results feature for both the map and graph&quot;">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/Controller.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model.js" beforeDir="false" afterPath="$PROJECT_DIR$/Model.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Cyclist.html" beforeDir="false" afterPath="$PROJECT_DIR$/Cyclist.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pedestrian.html" beforeDir="false" afterPath="$PROJECT_DIR$/Pedestrian.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Traffic.html" beforeDir="false" afterPath="$PROJECT_DIR$/Traffic.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/View.js" beforeDir="false" afterPath="$PROJECT_DIR$/View.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/homepage-style.css" beforeDir="false" afterPath="$PROJECT_DIR$/homepage-style.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -122,7 +123,7 @@
       <workItem from="1708187897354" duration="211000" />
       <workItem from="1708451041687" duration="15314000" />
       <workItem from="1708540999310" duration="227000" />
-      <workItem from="1708615215871" duration="3330000" />
+      <workItem from="1708615215871" duration="12941000" />
     </task>
     <task id="LOCAL-00001" summary="refactored code to a mvc structure properly with classes and finished map and chart">
       <created>1704032096111</created>
@@ -166,7 +167,14 @@
       <option name="project" value="LOCAL" />
       <updated>1708541218252</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="&quot;Fixed the filter zero results feature for both the map and graph&quot;">
+      <created>1708620406706</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1708620406706</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -190,6 +198,7 @@
     <MESSAGE value="&quot;Have completed the traffic page&quot;" />
     <MESSAGE value="&quot;Clean up of the html files, fixed the broken navbar, linked the map and the graph (if you click on the graph result takes you to the point in the map). Added a filter to hide the zero results.&quot;" />
     <MESSAGE value="&quot;added a loading spinner for the pages and the for the submit button when fetching data&quot;" />
-    <option name="LAST_COMMIT_MESSAGE" value="&quot;added a loading spinner for the pages and the for the submit button when fetching data&quot;" />
+    <MESSAGE value="&quot;Fixed the filter zero results feature for both the map and graph&quot;" />
+    <option name="LAST_COMMIT_MESSAGE" value="&quot;Fixed the filter zero results feature for both the map and graph&quot;" />
   </component>
 </project>
