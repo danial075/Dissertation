@@ -186,13 +186,36 @@ class View {
                 data: {
                     labels: xAxis,
                     datasets: [{
-                        label: 'Glasgow Pedestrian Statistics',
+                        label: 'Glasgow Pedestrian Statistics ' + controller.getStartDate() + ' to ' + controller.getEndDate(),
                         data: yAxis,
-                        borderWidth: 1
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)', // pink
+                            'rgba(54, 162, 235, 0.2)', // blue
+                            'rgba(255, 206, 86, 0.2)', // yellow
+                            'rgba(75, 192, 192, 0.2)', // green
+                            'rgba(153, 102, 255, 0.2)', // purple
+                            'rgba(255, 159, 64, 0.2)', // orange
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)',
+                        ],
+                        borderWidth: 1,
+                        datalabels: {
+                            color: 'green',
+                            align: 'center',
+                        }
                     }]
+
                 },
 
                 options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
                     onClick: (event, elements,) => {
                         if (elements.length) {
                             const firstPoint = elements[0];
@@ -251,13 +274,36 @@ class View {
                 data: {
                     labels: xAxis,
                     datasets: [{
-                        label: 'Glasgow Cyclist Statistics',
+                        label: 'Glasgow Cyclist Statistics ' + controller.getStartDate() + + ' to ' + controller.getEndDate(),
                         data: yAxis,
-                        borderWidth: 1
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)', // pink
+                            'rgba(54, 162, 235, 0.2)', // blue
+                            'rgba(255, 206, 86, 0.2)', // yellow
+                            'rgba(75, 192, 192, 0.2)', // green
+                            'rgba(153, 102, 255, 0.2)', // purple
+                            'rgba(255, 159, 64, 0.2)', // orange
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)',
+                        ],
+
+                        borderWidth: 1,
+                        datalabels: {
+                            color: 'green',
+                            align: 'center',
+                        }
                     }]
                 },
 
                 options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
                     onClick: (event, elements,) => {
                         if (elements.length) {
                             const firstPoint = elements[0];
@@ -315,13 +361,35 @@ class View {
                 data: {
                     labels: xAxis,
                     datasets: [{
-                        label: 'Glasgow Traffic Statistics',
+                        label: 'Glasgow Traffic Statistics '  + controller.getStartDate() + ' to ' + controller.getEndDate(),
                         data: yAxis,
-                        borderWidth: 1
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)', // pink
+                            'rgba(54, 162, 235, 0.2)', // blue
+                            'rgba(255, 206, 86, 0.2)', // yellow
+                            'rgba(75, 192, 192, 0.2)', // green
+                            'rgba(153, 102, 255, 0.2)', // purple
+                            'rgba(255, 159, 64, 0.2)', // orange
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)',
+                        ],
+                        borderWidth: 1,
+                        datalabels: {
+                            color: 'green',
+                            align: 'center',
+                        }
                     }]
                 },
-
+                plugins: [ChartDataLabels],
                 options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
                     onClick: (event, elements,) => {
                         if (elements.length) {
                             const firstPoint = elements[0];
@@ -348,19 +416,35 @@ class View {
         }
     }
 
-// This function is responsible for downloading the graph as png
+// This function is responsible for downloading the graph as png.
     downloadImage() {
-        const imageLink = document.createElement('a');
         const canvas = document.getElementById('glasgowGraph');
-        imageLink.download = 'Canvas123.png';
-        imageLink.href = canvas.toDataURL('image/png', 1);
-        imageLink.click()
 
+        // Create a new canvas element to avoid altering the original one
+        // The reason for doing this is fixing a dark background issue
+        const exportCanvas = document.createElement('canvas');
+        exportCanvas.width = canvas.width;
+        exportCanvas.height = canvas.height;
 
+        const exportCtx = exportCanvas.getContext('2d');
+        // Fill the background with white color this is so you can see the graph
+
+        exportCtx.fillStyle = '#ffffff'; // Or any other color
+        exportCtx.fillRect(0, 0, exportCanvas.width, exportCanvas.height);
+
+        // Draw the original canvas content onto the new canvas
+        exportCtx.drawImage(canvas, 0, 0);
+
+        // Now you can convert the new canvas with the white background to a data URL
+        const imageLink = document.createElement('a');
+        imageLink.download = 'Glasgow-' + controller.getPageType() + '-Graph';
+        imageLink.href = exportCanvas.toDataURL('image/png');
+        imageLink.click();
     }
 
 // This function is responsible for downloading the graph as a pdf
     downloadPDF() {
+        const { jsPDF } = window.jspdf;
         // Create image
         const canvas = document.getElementById('glasgowGraph');
         const canvasImage = canvas.toDataURL('image/png', 1);
@@ -368,7 +452,7 @@ class View {
         let pdf = new jsPDF('landscape');
         pdf.setFontSize(20);
         pdf.addImage(canvasImage, 'PNG', 15, 15, 280, 150);
-        pdf.save('Glasgow-hub');
+        pdf.save('Glasgow-' + controller.getPageType() + '-Graph');
 
 
     }

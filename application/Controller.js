@@ -27,8 +27,17 @@ class Controller {
         });
 
         document.getElementById('settingDateParameters').addEventListener('submit', (event) => {
-            event.preventDefault(); // This line prevents the default form submission
-            this.handleGetData();
+            event.preventDefault(); // Prevent the default form submission
+
+            let startDate = controller.getStartDate();
+            let endDate = controller.getEndDate();
+
+            // Validate that start and end dates are different for 'traffic' pageType
+            if (startDate === endDate && controller.getPageType() === 'traffic') {
+                alert("Please ensure both dates are different");
+            } else {
+                this.handleGetData();
+            }
         });
 
 
@@ -80,6 +89,10 @@ class Controller {
         return document.getElementById('endDate').value;
     }
 
+    getPageType() {
+        return document.body.getAttribute('data-page-type');
+    }
+
     getCheckBox() {
         return document.getElementById('hideZeroCounts');
     }
@@ -101,8 +114,8 @@ class Controller {
         // Change display style to 'block'
         imageButton.style.display = "block";
         pdfButton.style.display = "block";
-
         document.getElementById('hideZeroCounts').disabled = false;
+        document.getElementById('topResultsDropdown').disabled = false;
 
     }
 

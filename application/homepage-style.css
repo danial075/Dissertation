@@ -1,16 +1,39 @@
-navbar-brand.active {
-    background-color: aquamarine !important;
-    color: black !important;
-    border-radius: 0px !important;
+h3 {
+    font-family: "Times New Roman", Times, serif; /* Sets the default font for the body */
+    color: green; /* Sets the default text color */
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 1.2rem;
 
 }
+
+.project-title{
+    border: 7px solid green;
+    padding: 5px;
+    margin: auto;
+    max-width: 70%;
+    text-align: center;
+    font-family: "Times New Roman", Times, serif;
+    color: green;
+}
+
+
+/* If you want to remove the bottom margin from h1 */
+.bordered-container h1 {
+    margin-bottom: 0;
+}
+
+/* If you want to remove the top margin from h4 */
+.bordered-container h4 {
+    margin-top: 0;
+}
+
+
 .navbar-brand:hover {
     background-color: rgba(164,245,218,0.6);
     border-radius: 0px;
 }
-.cream-background {
-    background-color: white;
-}
+
 
 .spinner-wrapper {
     background-color: white;
@@ -31,3 +54,52 @@ navbar-brand.active {
     width: 60px;
 }
 
+
+
+/* Styles for tablets */
+@media (max-width: 768px) {
+    .project-title {
+        max-width: 70%; /* A bit smaller on tablets */
+    }
+    h3 {
+        font-size: 1.1rem;
+        text-align: center;
+    }
+}
+
+/* Styles for small desktops */
+@media (min-width: 769px) and (max-width: 992px) {
+    .project-title {
+        max-width: 80%; /* Slightly wider on small desktops */
+    }
+    h3 {
+        font-size: 1.2rem;
+        /* You might want to align text left on desktops */
+        text-align: left;
+    }
+}
+
+/* Styles for large desktop screens */
+@media (min-width: 993px) and (max-width: 1199px) {
+    .project-title {
+        max-width: 80%; /* Even wider on larger desktops */
+    }
+    h3 {
+        font-size: 1.3rem;
+    }
+}
+
+/* Styles for very large screens */
+@media (min-width: 1200px) {
+    .project-title {
+        max-width: 90%; /* Maximum width on very large screens */
+    }
+
+    h3 {
+        font-size: 1.4rem;
+    }
+}
+
+body {
+    background-color: #d0e6d0;
+}
