@@ -1,40 +1,51 @@
-// Controller
 class Controller {
     constructor(model, view) {
         this.model = model;
         this.view = view;
         this.setupEventListeners();
+
     }
 
 
     setupEventListeners() {
-       window.addEventListener('load',() => {
-           document.querySelector('.spinner-wrapper').opacity = '0';
 
-           setTimeout(() => {
-               document.querySelector('.spinner-wrapper').style.display = 'none';
-           },200);
-       });
+        // This event listener ensures a load spinner is shown between loading different pages
+        window.addEventListener('load', () => {
+            document.querySelector('.spinner-wrapper').opacity = '0';
 
-
-
-        document.addEventListener('DOMContentLoaded', function(event) {
-            let endDateElement = document.getElementById('endDate');
-            if (endDateElement) {
-                let today = new Date().toISOString().split('T')[0];
-                endDateElement.setAttribute('max', today);
+            setTimeout(() => {
+                document.querySelector('.spinner-wrapper').style.display = 'none';
+            }, 200);
+        });
+        // This event listener ensures a load spinner is shown between loading different pages
+        window.addEventListener('resize', () => {
+            if (this.view.Graph) {
+                this.view.updateGraphFontSizes();
             }
         });
 
+
         document.getElementById('settingDateParameters').addEventListener('submit', (event) => {
             event.preventDefault(); // Prevent the default form submission
+            const startDate = controller.getStartDate();
+            const endDate = controller.getEndDate();
+            const pageType = controller.getPageType(); // Assuming you have a method in View to get the current page type
 
-            let startDate = controller.getStartDate();
-            let endDate = controller.getEndDate();
+            // Aggregate validation messages
+            let validationMessages = [
+                ...this.model.isValidDate(startDate),
+                ...this.model.isValidDate(endDate),
+                ...this.model.isDateNotInFuture(startDate, endDate),
+                ...this.model.isStartDateBeforeEndDate(startDate, endDate),
+                ...this.model.isStartDateValidForPageType(startDate, endDate, pageType)
+            ];
 
-            // Validate that start and end dates are different for 'traffic' pageType
-            if (startDate === endDate && controller.getPageType() === 'traffic') {
-                alert("Please ensure both dates are different");
+            // Remove potential duplicate messages
+            validationMessages = [...new Set(validationMessages)];
+
+            // Display validation messages, if any
+            if (validationMessages.length > 0) {
+                validationMessages.forEach(message => this.view.displayAlert(message));
             } else {
                 this.handleGetData();
             }
@@ -43,16 +54,16 @@ class Controller {
 
         document.getElementById('imageButton').addEventListener('click', () => this.view.downloadImage());
         document.getElementById('pdfButton').addEventListener('click', () => this.view.downloadPDF());
-        document.getElementById('hideZeroCounts').addEventListener('change', () => this.handleCheckboxChange());
-        document.getElementById('topResultsDropdown').addEventListener('change', () => this.handleGetData() );
+        document.getElementById('hideZeroCounts').addEventListener('change', () => this.handleGetData());
+        document.getElementById('topResultsDropdown').addEventListener('change', () => this.handleGetData());
 
     }
 
-    handleCheckboxChange() {
-        // Here, you call the methods to create the map and graph again with the updated checkbox state
-        // It's important to have the updated data that's why we call handleGetData again
-        this.handleGetData();
-    }
+    // handleCheckboxChange() {
+    //     // Here, you call the methods to create the map and graph again with the updated checkbox state
+    //     // It's important to have the updated data that's why we call handleGetData again
+    //     this.handleGetData();
+    // }
 
 
     handleGetData() {
@@ -65,12 +76,12 @@ class Controller {
 
 
         this.model.getDataFromAPI(startDate, endDate, pageType).then(data => {
-           console.log(data);
+            console.log(data);
             const graphData = this.model.convertToGraphData(data, pageType);
             const geoJSONData = this.model.convertToGeoJSON(data, pageType);
             this.view.createGraph(graphData, pageType);
             this.view.createMap(geoJSONData, pageType);
-            this.showDownloadButtons();
+            this.view.showDownloadButtons();
         }).catch(error => {
             console.error('Error fetching/handling data', error);
         })
@@ -99,24 +110,6 @@ class Controller {
 
     getUserFilter() {
         return document.getElementById('topResultsDropdown').value;
-    }
-
-
-    showDownloadButtons() {
-
-        const imageButton = document.getElementById('imageButton');
-        const pdfButton = document.getElementById('pdfButton');
-
-        // Remove the 'hidden' attribute if it's set
-        imageButton.removeAttribute('hidden');
-        pdfButton.removeAttribute('hidden');
-
-        // Change display style to 'block'
-        imageButton.style.display = "block";
-        pdfButton.style.display = "block";
-        document.getElementById('hideZeroCounts').disabled = false;
-        document.getElementById('topResultsDropdown').disabled = false;
-
     }
 
 

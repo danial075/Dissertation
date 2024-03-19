@@ -4,21 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a3a5859f-ef29-4d20-b8f2-44460dabe573" name="Changes" comment="&quot;added a filter for top 5 up to top 20&quot;">
-      <change afterPath="$PROJECT_DIR$/sampleTrafficData.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/trafficSensorData.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+    <list default="true" id="a3a5859f-ef29-4d20-b8f2-44460dabe573" name="Changes" comment="&quot;css and extra features added and fixed. Code review needs to be done but fully working and implemented everything I want&quot;">
+      <change afterPath="$PROJECT_DIR$/Test.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/unit-testing.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/Controller.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Cyclist.html" beforeDir="false" afterPath="$PROJECT_DIR$/Cyclist.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model.js" beforeDir="false" afterPath="$PROJECT_DIR$/Model.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Pedestrian.html" beforeDir="false" afterPath="$PROJECT_DIR$/Pedestrian.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Traffic.html" beforeDir="false" afterPath="$PROJECT_DIR$/Traffic.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/View.js" beforeDir="false" afterPath="$PROJECT_DIR$/View.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application.iml" beforeDir="false" afterPath="$PROJECT_DIR$/application.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/homepage-style.css" beforeDir="false" afterPath="$PROJECT_DIR$/homepage-style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/homepage-style.css" beforeDir="false" afterPath="$PROJECT_DIR$/Homepage-style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/Page-style.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,9 +32,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="package.json" />
+        <option value="CSS File" />
         <option value="JavaScript File" />
         <option value="HTML File" />
-        <option value="CSS File" />
       </list>
     </option>
   </component>
@@ -65,12 +65,16 @@
     &quot;WebServerToolWindowPanel.toolwindow.show.date&quot;: &quot;false&quot;,
     &quot;WebServerToolWindowPanel.toolwindow.show.permissions&quot;: &quot;false&quot;,
     &quot;WebServerToolWindowPanel.toolwindow.show.size&quot;: &quot;false&quot;,
+    &quot;javascript.nodejs.core.library.configured.version&quot;: &quot;16.20.2&quot;,
+    &quot;javascript.nodejs.core.library.typings.version&quot;: &quot;16.18.87&quot;,
     &quot;last_opened_file_path&quot;: &quot;/Users/danialsheikh/Documents/Uni/4th-year/dissertation/application/.idea&quot;,
     &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs.jest.jest_package&quot;: &quot;/Users/danialsheikh/Documents/Uni/4th-year/dissertation/application/node_modules/jest&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;ruby.rails.projectView.checked&quot;: &quot;true&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;IntelliLang.Configuration&quot;
   }
@@ -79,6 +83,80 @@
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/.idea" />
     </key>
+  </component>
+  <component name="RunManager" selected="Jest.All Tests">
+    <configuration name="All Tests" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <node-options value="" />
+      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="ALL" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Controller" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <node-options value="" />
+      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="SUITE" />
+      <test-file value="$PROJECT_DIR$/unit-testing.test.js" />
+      <test-names>
+        <test-name value="Controller" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="Controller.should instantiate the controller" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <node-options value="" />
+      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/unit-testing.test.js" />
+      <test-names>
+        <test-name value="Controller" />
+        <test-name value="should instantiate the controller" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="Traffic Controller Tests" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <node-options value="" />
+      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="SUITE" />
+      <test-file value="$PROJECT_DIR$/unit-testing.test.js" />
+      <test-names>
+        <test-name value="Traffic Controller Tests" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="Traffic Controller Tests.event listeners are attached" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <node-options value="" />
+      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/unit-testing.test.js" />
+      <test-names>
+        <test-name value="Traffic Controller Tests" />
+        <test-name value="event listeners are attached" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Jest.Controller" />
+        <item itemvalue="Jest.All Tests" />
+        <item itemvalue="Jest.Controller.should instantiate the controller" />
+        <item itemvalue="Jest.Traffic Controller Tests" />
+        <item itemvalue="Jest.Traffic Controller Tests.event listeners are attached" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -135,7 +213,20 @@
       <workItem from="1708707806970" duration="11168000" />
       <workItem from="1708770147641" duration="10441000" />
       <workItem from="1708798214648" duration="17075000" />
-      <workItem from="1708948507462" duration="15609000" />
+      <workItem from="1708948507462" duration="15809000" />
+      <workItem from="1709035850051" duration="2226000" />
+      <workItem from="1709135845899" duration="27454000" />
+      <workItem from="1709554842705" duration="59000" />
+      <workItem from="1709820674298" duration="6082000" />
+      <workItem from="1709830775704" duration="3742000" />
+      <workItem from="1709836174814" duration="5093000" />
+      <workItem from="1709908429986" duration="3068000" />
+      <workItem from="1710018864812" duration="2959000" />
+      <workItem from="1710081896047" duration="9005000" />
+      <workItem from="1710328566679" duration="9594000" />
+      <workItem from="1710612992489" duration="850000" />
+      <workItem from="1710623530820" duration="3335000" />
+      <workItem from="1710764379295" duration="3155000" />
     </task>
     <task id="LOCAL-00001" summary="refactored code to a mvc structure properly with classes and finished map and chart">
       <created>1704032096111</created>
@@ -193,7 +284,14 @@
       <option name="project" value="LOCAL" />
       <updated>1708699728274</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="&quot;css and extra features added and fixed. Code review needs to be done but fully working and implemented everything I want&quot;">
+      <created>1708982438324</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1708982438324</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -219,6 +317,7 @@
     <MESSAGE value="&quot;added a loading spinner for the pages and the for the submit button when fetching data&quot;" />
     <MESSAGE value="&quot;Fixed the filter zero results feature for both the map and graph&quot;" />
     <MESSAGE value="&quot;added a filter for top 5 up to top 20&quot;" />
-    <option name="LAST_COMMIT_MESSAGE" value="&quot;added a filter for top 5 up to top 20&quot;" />
+    <MESSAGE value="&quot;css and extra features added and fixed. Code review needs to be done but fully working and implemented everything I want&quot;" />
+    <option name="LAST_COMMIT_MESSAGE" value="&quot;css and extra features added and fixed. Code review needs to be done but fully working and implemented everything I want&quot;" />
   </component>
 </project>

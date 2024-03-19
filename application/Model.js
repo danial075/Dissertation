@@ -1,14 +1,14 @@
+
 class Model {
 
 
 // This function gets the data from the Pedestrian and Cyclist API
     async getDataFromAPI(startDate, endDate, dataType) {
-
         let url;
         let data;
-        let urlPedestrian = `https://api.glasgow.gov.uk/mobility/v1/footfall/historical?format=json&startDate=${startDate}&endDate=${endDate}`;
-        let urlCyclist = `https://api.glasgow.gov.uk/mobility/v1/Mobility_Measurements?format=json&period=day&type=bicycle&date=${startDate}&end=${endDate}`
-        let urlTraffic = `https://api.glasgow.gov.uk/traffic/v1/movement/query?start=${startDate}&end=${endDate}&period=Day`;
+        let urlPedestrian = (`https://api.glasgow.gov.uk/mobility/v1/footfall/historical?format=json&startDate=${startDate}&endDate=${endDate}`);
+        let urlCyclist = (`https://api.glasgow.gov.uk/mobility/v1/Mobility_Measurements?format=json&period=day&type=bicycle&date=${startDate}&end=${endDate}`);
+        let urlTraffic = (`https://api.glasgow.gov.uk/traffic/v1/movement/query?start=${startDate}&end=${endDate}&period=Day`);
 
         if (dataType === 'pedestrian') {
             url = urlPedestrian;
@@ -27,10 +27,10 @@ class Model {
             data = await response.json();
 
             if (dataType === 'cyclist') {
-                data = await this.LocationToCyclistData(data, dataType);
+                data = await this.locationOfSensors(data, dataType);
             }
             if (dataType === 'traffic') {
-                data = await this.LocationToCyclistData(data, dataType);
+                data = await this.locationOfSensors(data, dataType);
 
             }
             console.log(data);
@@ -43,7 +43,7 @@ class Model {
     }
 
 // This function adds the location and coordinates to the cyclist data
-    async LocationToCyclistData(unsortedData, dataType) {
+    async locationOfSensors(unsortedData, dataType) {
         if (dataType === 'cyclist') {
             let url = `https://api.glasgow.gov.uk/mobility/v1/Mobility_Sites?format=json`;
 
@@ -349,6 +349,81 @@ class Model {
                 "features": features
             };
         }
+
+    }
+
+    // checks if the date inputted is in a valid format
+    isValidDate(dateString) {
+        const regEx = /^\d{4}-\d{2}-\d{2}$/;
+        if (!dateString.match(regEx)) {
+            // Invalid format
+            return ["Invalid date format. Please enter the date in the format YYYY-MM-DD."];
+        }
+        const d = new Date(dateString);
+        const dNum = d.getTime();
+        if (!dNum && dNum !== 0) {
+            // NaN value, Invalid date
+            return ["Please enter valid dates in the format DD-MM-YYYY.\n For example 11th May 2020 would be 11-05-2001"];
+        }
+        // If the date is valid, return an empty array
+        return [];
+    }
+
+
+    // Validate that date is not in the future
+    isDateNotInFuture(startDate, endDate) {
+        let validationMessages = [];
+        const today = new Date();
+        today.setHours(0, 0, 0, 0); // Ignore time part for comparison
+        const userStartDate = new Date(startDate);
+        const userEndDate = new Date(endDate);
+        if (userStartDate > today) {
+            validationMessages.push("The start date must not be in the future");
+        }
+        if (userEndDate > today) {
+            validationMessages.push("The end date must not be in the future");
+        }
+       return validationMessages;
+
+
+    }
+
+    // Validate that the start date comes before end date
+    isStartDateBeforeEndDate(startDate, endDate) {
+        let validationMessages = [];
+        if (startDate > endDate) {
+            validationMessages.push("Please ensure the start date is before the end date");
+        }
+        return validationMessages;
+    }
+
+    // Validate start date against specific page types with their respective constraints
+    isStartDateValidForPageType(startDate, endDate, pageType) {
+        let validationMessages = [];
+        // Validate that start and end dates are different for 'traffic' pageType
+        if (startDate === endDate && pageType === 'traffic') {
+            validationMessages.push("Due to a restriction from Glasgow open Data Hub, the start date and end date must be different for traffic results.");
+        }
+        // Ensure startDate for traffic page is minimum January 1st 2019
+        let minStartDate = new Date('2019-01-01');
+        let startDateObj = new Date(startDate); // Convert startDate string to Date object
+        if (startDateObj < minStartDate && pageType === 'traffic') {
+            validationMessages.push("The start date must be January 1st 2019 or later.");
+        }
+        // Ensure startDate for cyclist page is minimum 23rd February 2016
+        minStartDate = new Date('2016-02-23');
+        startDateObj = new Date(startDate); // Convert startDate string to Date object
+        if (startDateObj < minStartDate && pageType === 'cyclist') {
+            validationMessages.push("The start date must be 23rd February 2016 or later.");
+
+        }
+        // Ensure startDate for pedestrian page is minimum 21st May 2007
+        minStartDate = new Date('2016-02-23');
+        startDateObj = new Date(startDate); // Convert startDate string to Date object
+        if (startDateObj < minStartDate && pageType === 'pedestrian') {
+            validationMessages.push("The start date must be 23rd February 2016 or later.");
+        }
+        return validationMessages;
 
     }
 

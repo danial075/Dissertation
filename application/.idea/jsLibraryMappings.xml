@@ -2,5 +2,6 @@
 <project version="4">
   <component name="JavaScriptLibraryMappings">
     <file url="PROJECT" libraries="{@popperjs/core, Chart.js, chart.js, chartjs-plugin-datalabels, d3.v6, font-awesome, jspdf, leaflet, pdf.js}" />
+    <includedPredefinedLibrary name="Node.js Core" />
   </component>
 </project>

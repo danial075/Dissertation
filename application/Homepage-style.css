@@ -3,7 +3,7 @@ h3 {
     color: green; /* Sets the default text color */
     margin-left: 10px;
     margin-right: 10px;
-    font-size: 1.2rem;
+    font-size: 1.3rem;
 
 }
 
@@ -13,7 +13,7 @@ h3 {
     margin: auto;
     max-width: 70%;
     text-align: center;
-    font-family: "Times New Roman", Times, serif;
+    /*font-family: "Times New Roman", Times, serif;*/
     color: green;
 }
 
@@ -62,7 +62,7 @@ h3 {
         max-width: 70%; /* A bit smaller on tablets */
     }
     h3 {
-        font-size: 1.1rem;
+        font-size: 2.0rem;
         text-align: center;
     }
 }
@@ -73,7 +73,7 @@ h3 {
         max-width: 80%; /* Slightly wider on small desktops */
     }
     h3 {
-        font-size: 1.2rem;
+        font-size: 2.0rem;
         /* You might want to align text left on desktops */
         text-align: left;
     }
@@ -85,7 +85,7 @@ h3 {
         max-width: 80%; /* Even wider on larger desktops */
     }
     h3 {
-        font-size: 1.3rem;
+        font-size: 2.0rem;
     }
 }
 
@@ -96,10 +96,11 @@ h3 {
     }
 
     h3 {
-        font-size: 1.4rem;
+        font-size: 2.0rem;
     }
 }
 
 body {
     background-color: #d0e6d0;
+
 }

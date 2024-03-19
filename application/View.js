@@ -143,17 +143,36 @@ class View {
         }
     }
 
+    // This function will return a font size based on the window width
+    getResponsiveFontSize() {
+        const width = window.innerWidth;
+        if (width > 1200) return 16; // Large screens
+        if (width > 992) return 14; // Medium screens
+        if (width > 768) return 12; // Small screens
+        return 10; // Extra small screens
+    }
+
+    // This function will update the font sizes of the chart
+    updateGraphFontSizes() {
+        const fontSize = this.getResponsiveFontSize();
+        this.Graph.options.scales.x.ticks.font.size = fontSize;
+        this.Graph.options.scales.y.ticks.font.size = fontSize;
+        // Also update the axis title sizes if needed
+        this.Graph.options.scales.x.title.font.size = fontSize;
+        this.Graph.options.scales.y.title.font.size = fontSize;
+        this.Graph.update();
+    }
+
     // This creates the interactive graph to show the data picked up from the sensors
     createGraph(graphData, dataType) {
         console.log(graphData);
-
+        const fontSize = this.getResponsiveFontSize(); // Get the initial responsive font size
         if (this.Graph !== null) {
             this.Graph.destroy();
 
         }
         if (dataType === 'pedestrian') {
             const ctx = document.getElementById('glasgowGraph');
-
             // Extracting labels (street names) and data (pedestrian counts)
             let xAxis = Object.keys(graphData);
             let yAxis = xAxis.map(x => graphData[x].pedestrianCount);
@@ -206,14 +225,35 @@ class View {
                         ],
                         borderWidth: 1,
                         datalabels: {
-                            color: 'green',
+                            font: {
+                                size:fontSize,
+                                weight: 'bold'
+                            },
+                            color: 'white',
                             align: 'center',
                         }
                     }]
 
                 },
+                plugins: [ChartDataLabels],
 
                 options: {
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: 'black', // Set the legend text color
+                                font: {
+                                    size: fontSize, // Set the legend font size
+                                    family: 'Times New Roman', // Set the legend font family
+                                    weight: 'bold' // Set the legend font weight
+                                },
+                            },
+                            // If you still see the background, try adding this:
+                            backgroundColor: 'transparent', // Set the legend background to transparent
+
+
+                        }
+                    },
                     responsive: true,
                     maintainAspectRatio: false,
                     onClick: (event, elements,) => {
@@ -229,7 +269,44 @@ class View {
                         }
                     },
                     scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Location of sensors during this time',
+                                color: 'red',
+                                font: {
+                                    size: fontSize,
+                                    family: 'Times New Roman',
+                                    weight: 'bold'
+
+                                }
+                            },
+                            ticks:{
+                                font: {
+                                    size: fontSize,
+                                    family: 'Times New Roman'
+                                }
+                            }
+                        },
                         y: {
+                            title: {
+                                display: true,
+                                text: 'Number of Pedestrians',
+                                color: 'red',
+                                font: {
+                                    size: fontSize,
+                                    family: 'Times New Roman',
+                                    weight: 'bold'
+
+                                }
+
+                            },
+                            ticks:{
+                                font: {
+                                    size: fontSize,
+                                    family: 'Times New Roman'
+                                }
+                            },
                             beginAtZero: true
                         }
 
@@ -274,7 +351,7 @@ class View {
                 data: {
                     labels: xAxis,
                     datasets: [{
-                        label: 'Glasgow Cyclist Statistics ' + controller.getStartDate() + + ' to ' + controller.getEndDate(),
+                        label: 'Glasgow Cyclist Statistics ' + controller.getStartDate() + ' to ' + controller.getEndDate(),
                         data: yAxis,
                         backgroundColor: [
                             'rgba(255, 99, 132, 0.2)', // pink
@@ -295,13 +372,29 @@ class View {
 
                         borderWidth: 1,
                         datalabels: {
-                            color: 'green',
+                            color: 'white',
                             align: 'center',
                         }
                     }]
                 },
-
+                plugins: [ChartDataLabels],
                 options: {
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: 'black', // Set the legend text color
+                                font: {
+                                    size: fontSize, // Set the legend font size
+                                    family: 'Times New Roman', // Set the legend font family
+                                    weight: 'bold' // Set the legend font weight
+                                },
+                            },
+                            // If you still see the background, try adding this:
+                            backgroundColor: 'transparent', // Set the legend background to transparent
+
+
+                        }
+                    },
                     responsive: true,
                     maintainAspectRatio: false,
                     onClick: (event, elements,) => {
@@ -317,10 +410,48 @@ class View {
                         }
                     },
                     scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Location of sensors during this time',
+                                color: 'red',
+                                font: {
+                                    size: fontSize,
+                                    family: 'Times New Roman',
+                                    weight: 'bold'
+
+                                }
+                            },
+                            ticks:{
+                                font: {
+                                    size: fontSize,
+                                    family: 'Times New Roman'
+                                }
+                            }
+                        },
                         y: {
+                            title: {
+                                display: true,
+                                text: 'Number of Cyclists',
+                                color: 'red',
+                                font: {
+                                    size: fontSize,
+                                    family: 'Times New Roman',
+                                    weight: 'bold'
+
+                                }
+
+                            },
+                            ticks:{
+                                font: {
+                                    size: fontSize,
+                                    family: 'Times New Roman'
+                                }
+                            },
                             beginAtZero: true
                         }
-                    }
+
+                    },
 
                 },
 
@@ -361,7 +492,7 @@ class View {
                 data: {
                     labels: xAxis,
                     datasets: [{
-                        label: 'Glasgow Traffic Statistics '  + controller.getStartDate() + ' to ' + controller.getEndDate(),
+                        label: 'Glasgow Traffic Statistics ' + controller.getStartDate() + ' to ' + controller.getEndDate(),
                         data: yAxis,
                         backgroundColor: [
                             'rgba(255, 99, 132, 0.2)', // pink
@@ -381,13 +512,29 @@ class View {
                         ],
                         borderWidth: 1,
                         datalabels: {
-                            color: 'green',
+                            color: 'white',
                             align: 'center',
                         }
                     }]
                 },
                 plugins: [ChartDataLabels],
                 options: {
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: 'black', // Set the legend text color
+                                font: {
+                                    size: fontSize, // Set the legend font size
+                                    family: 'Times New Roman', // Set the legend font family
+                                    weight: 'bold' // Set the legend font weight
+                                },
+                            },
+                            // If you still see the background, try adding this:
+                            backgroundColor: 'transparent', // Set the legend background to transparent
+
+
+                        }
+                    },
                     responsive: true,
                     maintainAspectRatio: false,
                     onClick: (event, elements,) => {
@@ -403,10 +550,48 @@ class View {
                         }
                     },
                     scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Location of sensors during this time',
+                                color: 'red',
+                                font: {
+                                    size: fontSize,
+                                    family: 'Times New Roman',
+                                    weight: 'bold'
+
+                                }
+                            },
+                            ticks:{
+                            font: {
+                                size: fontSize,
+                                family: 'Times New Roman'
+                            }
+                            }
+                        },
                         y: {
+                            title: {
+                                display: true,
+                                text: 'Number of Vehicles',
+                                color: 'red',
+                                font: {
+                                    size: fontSize,
+                                    family: 'Times New Roman',
+                                    weight: 'bold'
+
+                                }
+
+                            },
+                            ticks:{
+                                font: {
+                                    size: fontSize,
+                                    family: 'Times New Roman'
+                                }
+                            },
                             beginAtZero: true
                         }
-                    }
+
+                    },
 
                 },
 
@@ -444,7 +629,7 @@ class View {
 
 // This function is responsible for downloading the graph as a pdf
     downloadPDF() {
-        const { jsPDF } = window.jspdf;
+        const {jsPDF} = window.jspdf;
         // Create image
         const canvas = document.getElementById('glasgowGraph');
         const canvasImage = canvas.toDataURL('image/png', 1);
@@ -455,6 +640,35 @@ class View {
         pdf.save('Glasgow-' + controller.getPageType() + '-Graph');
 
 
+    }
+
+    showDownloadButtons() {
+
+        const imageButton = document.getElementById('imageButton');
+        const pdfButton = document.getElementById('pdfButton');
+
+        // Remove the 'hidden' attribute if it's set
+        imageButton.removeAttribute('hidden');
+        pdfButton.removeAttribute('hidden');
+
+        // Change display style to 'block'
+        imageButton.style.display = "block";
+        pdfButton.style.display = "block";
+        document.getElementById('hideZeroCounts').disabled = false;
+        document.getElementById('topResultsDropdown').disabled = false;
+
+    }
+
+    displayAlert(message) {
+        alert(message);
+    }
+
+    getStartDate() {
+        return document.getElementById('startDate').value;
+    }
+
+    getEndDate() {
+        return document.getElementById('endDate').value;
     }
 
 }
