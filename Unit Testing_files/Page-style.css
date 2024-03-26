@@ -1,0 +1,222 @@
+.navbar-brand.active {
+    background-color: aquamarine;
+    color: black;
+    border-radius: 0;
+
+}
+
+.navbar-brand:hover {
+    background-color: rgba(164, 245, 218, 0.6);
+    border-radius: 0;
+}
+
+.spinner-wrapper {
+    background-color: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2s;
+
+}
+
+.page-title h1 {
+    border: 0.438rem solid green;
+    padding: 0.188rem;
+    margin: auto;
+    max-width: 70%;
+    text-align: center;
+    /*font-family: "Times New Roman", Times, serif;*/
+    color: green;
+    font-size: 2.6rem;
+}
+
+.page-info h2 {
+    /*font-family: "Times New Roman", Times, serif; !* Sets the default font for the body *!*/
+    color: green; /* Sets the default text color */
+    margin-left: 0.063rem;
+    margin-right: 0.063rem;
+    font-size:  1.6rem;
+
+}
+#startToEnd {
+    margin: 0.625rem;
+    color: #1e4d20; /* Change the text color to white if needed */
+
+
+}
+
+#startDate {
+    margin-bottom: 0.625rem;
+}
+
+.hideZeroCheck {
+    margin: 0.625rem;
+    color: #1e4d20;;
+
+}
+
+.hideZeroCheck .form-check-input:checked {
+    background-color: green; /* Bootstrap 'success' color */
+    border-color: green;
+}
+
+/* Style for the dropdown */
+#topResultsDropdown {
+    color: white;
+    background-color: green; /* Hex code for Bootstrap 'success' color */
+}
+
+/* Style for the select box container */
+.selectBox {
+    margin: 0.625rem;
+    color: green;
+}
+
+/* Style for the filter results label */
+.filter-results-label {
+    display: block; /* ensures the label takes up the full width */
+    margin-bottom: 0.5rem; /* consistent spacing below the label */
+    color: #1e4d20; /* optional: if you want the label text to be green */
+}
+
+
+button {
+    color: white;
+    background-color: green;
+    margin: 10px;
+    border: none;
+
+
+
+}
+#submitButton{
+    color: white;
+    background-color: green;
+    margin: 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 12px;
+    display: inline-block;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Shadow for 3D effect */
+    transition: transform 0.2s, box-shadow 0.2s; /* Smooth transition for pressing effect */
+    outline-offset: 4px;
+}
+#submitButton:hover {
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3); /* Slightly larger shadow on hover */
+}
+
+
+
+.btn-xl {
+    padding: 1rem 1.5rem; /* Increase padding */
+    font-size: 1.25rem; /* Larger font size */
+    font-weight: bold;
+    border-radius: 0.3rem; /* Optional: Increase border-radius for rounded corners */
+    line-height: 1.5; /* Adjust line height for better vertical alignment */
+}
+
+
+
+
+
+/* This will style the input field */
+input[type="date"] {
+    background-color: green; /* Bootstrap's .btn-success background color */
+    border: 0.625rem solid green;
+    color: white; /* Use white color for text for better readability on the green background */
+}
+
+/* Base styles for extra large devices (default) */
+#glasgowGraph,
+#glasgowMap {
+    height: 50rem; /* Height for extra large screens */
+    width: 100%;
+}
+
+/* Default styles for larger screens */
+.form-label, .form-control, .form-check-label, .form-select, .btn-lg, .filter-results-label {
+    font-size: 1.2rem; /* Adjust the default size as needed */
+}
+
+/* Adjustments for large devices (desktops) */
+@media (max-width: 1199px) {
+    #glasgowGraph,
+    #glasgowMap {
+        height: 43.75rem;
+
+    }
+}
+
+/* Adjustments for medium devices (tablets) */
+@media (max-width: 800px) {
+    #glasgowGraph,
+    #glasgowMap {
+        height: 37.5rem;
+    }
+
+    .page-title h1 {
+        font-size: 2rem;
+    }
+
+    .page-info h2 {
+        font-size: 1rem; /* Slightly smaller font size for tablets */
+    }
+    .form-label, .form-control, .form-check-label, .form-select, .btn-lg, .filter-results-label {
+        font-size: 0.9rem; /* Adjust for tablets */
+        padding: 0.45rem;
+    }
+}
+
+/* Adjustments for small devices (landscape phones) */
+@media (max-width: 500px) {
+    #glasgowGraph,
+    #glasgowMap {
+        height: 31.25rem;
+    }
+
+
+    .page-title h1 {
+        font-size: 1.6rem;
+    }
+    .page-info h2 {
+        font-size: 0.9rem; /* Slightly smaller font size for tablets */
+    }
+    .form-label, .form-control, .form-check-label, .form-select, .btn-lg, .filter-results-label {
+        font-size: 0.8rem; /* Adjust for tablets */
+        padding: 0.4rem;
+    }
+}
+
+
+/* Adjustments for extra small devices (portrait phones) */
+@media (max-width: 350px) {
+    #glasgowGraph,
+    #glasgowMap {
+        height: 15rem;
+
+    }
+
+    .page-title h1 {
+        font-size: 1.2rem; /* Even smaller font size for landscape phones */
+    }
+    .page-info h2 {
+        font-size: 0.8rem; /* Slightly smaller font size for tablets */
+    }
+    .form-label, .form-control, .form-check-label, .form-select, .btn-lg, .filter-results-label {
+        font-size: 0.7rem; /* Adjust for tablets */
+        padding: 0.35rem;
+    }
+}
+
+body {
+    background-color: #d0e6d0;
+
+}
+
+

@@ -59,11 +59,6 @@ class Controller {
 
     }
 
-    // handleCheckboxChange() {
-    //     // Here, you call the methods to create the map and graph again with the updated checkbox state
-    //     // It's important to have the updated data that's why we call handleGetData again
-    //     this.handleGetData();
-    // }
 
 
     handleGetData() {

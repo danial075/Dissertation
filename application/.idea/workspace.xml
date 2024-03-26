@@ -4,21 +4,30 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a3a5859f-ef29-4d20-b8f2-44460dabe573" name="Changes" comment="&quot;css and extra features added and fixed. Code review needs to be done but fully working and implemented everything I want&quot;">
-      <change afterPath="$PROJECT_DIR$/Test.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/unit-testing.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
+    <list default="true" id="a3a5859f-ef29-4d20-b8f2-44460dabe573" name="Changes" comment="&quot;Added my dissertation report &quot;">
+      <change afterPath="$PROJECT_DIR$/../Unit Testing.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Unit Testing_files/2556.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Unit Testing_files/Controller.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Unit Testing_files/Model.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Unit Testing_files/Page-style.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Unit Testing_files/View.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Unit Testing_files/all.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Unit Testing_files/bootstrap.bundle.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Unit Testing_files/bootstrap.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Unit Testing_files/chart.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Unit Testing_files/chartjs-plugin-datalabels@latest" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Unit Testing_files/jspdf.umd.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Unit Testing_files/leaflet.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Unit Testing_files/leaflet.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Unit Testing_files/unit-testing.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/~$rd-dissertation.docx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/Controller.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Cyclist.html" beforeDir="false" afterPath="$PROJECT_DIR$/Cyclist.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Model.js" beforeDir="false" afterPath="$PROJECT_DIR$/Model.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pedestrian.html" beforeDir="false" afterPath="$PROJECT_DIR$/Pedestrian.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test.html" beforeDir="false" afterPath="$PROJECT_DIR$/Test.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Traffic.html" beforeDir="false" afterPath="$PROJECT_DIR$/Traffic.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/View.js" beforeDir="false" afterPath="$PROJECT_DIR$/View.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/homepage-style.css" beforeDir="false" afterPath="$PROJECT_DIR$/Homepage-style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/Page-style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unit-testing.js" beforeDir="false" afterPath="$PROJECT_DIR$/unit-testing.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/word-dissertation.docx" beforeDir="false" afterPath="$PROJECT_DIR$/word-dissertation.docx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,13 +57,16 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2XdOOh9lGgebUMkHFwjrJI3gIfe" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
     &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
@@ -226,7 +238,11 @@
       <workItem from="1710328566679" duration="9594000" />
       <workItem from="1710612992489" duration="850000" />
       <workItem from="1710623530820" duration="3335000" />
-      <workItem from="1710764379295" duration="3155000" />
+      <workItem from="1710764379295" duration="4096000" />
+      <workItem from="1710946076339" duration="1232000" />
+      <workItem from="1710964246288" duration="8749000" />
+      <workItem from="1711114309476" duration="8223000" />
+      <workItem from="1711396352630" duration="1035000" />
     </task>
     <task id="LOCAL-00001" summary="refactored code to a mvc structure properly with classes and finished map and chart">
       <created>1704032096111</created>
@@ -291,7 +307,21 @@
       <option name="project" value="LOCAL" />
       <updated>1708982438324</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="&quot;removed the cors proxy server from the code due to invalid ssl certificate and added dissertation&quot;">
+      <created>1710882306553</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1710882306554</updated>
+    </task>
+    <task id="LOCAL-00011" summary="&quot;Added my dissertation report &quot;">
+      <created>1710882436894</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1710882436894</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -309,6 +339,7 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="refactored code to a mvc structure properly with classes and finished map and chart" />
     <MESSAGE value="Have completed project presentation and script. Have made a homepage as well." />
     <MESSAGE value="&quot;Getting and sorted the cyclist data&quot;" />
@@ -318,6 +349,8 @@
     <MESSAGE value="&quot;Fixed the filter zero results feature for both the map and graph&quot;" />
     <MESSAGE value="&quot;added a filter for top 5 up to top 20&quot;" />
     <MESSAGE value="&quot;css and extra features added and fixed. Code review needs to be done but fully working and implemented everything I want&quot;" />
-    <option name="LAST_COMMIT_MESSAGE" value="&quot;css and extra features added and fixed. Code review needs to be done but fully working and implemented everything I want&quot;" />
+    <MESSAGE value="&quot;removed the cors proxy server from the code due to invalid ssl certificate and added dissertation&quot;" />
+    <MESSAGE value="&quot;Added my dissertation report &quot;" />
+    <option name="LAST_COMMIT_MESSAGE" value="&quot;Added my dissertation report &quot;" />
   </component>
 </project>

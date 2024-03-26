@@ -6,9 +6,9 @@ class Model {
     async getDataFromAPI(startDate, endDate, dataType) {
         let url;
         let data;
-        let urlPedestrian = (`https://api.glasgow.gov.uk/mobility/v1/footfall/historical?format=json&startDate=${startDate}&endDate=${endDate}`);
-        let urlCyclist = (`https://api.glasgow.gov.uk/mobility/v1/Mobility_Measurements?format=json&period=day&type=bicycle&date=${startDate}&end=${endDate}`);
-        let urlTraffic = (`https://api.glasgow.gov.uk/traffic/v1/movement/query?start=${startDate}&end=${endDate}&period=Day`);
+        let urlPedestrian = `https://corsproxy.io/?` + encodeURIComponent(`https://api.glasgow.gov.uk/mobility/v1/footfall/historical?format=json&startDate=${startDate}&endDate=${endDate}`);
+        let urlCyclist = `https://corsproxy.io/?` + encodeURIComponent(`https://api.glasgow.gov.uk/mobility/v1/Mobility_Measurements?format=json&period=day&type=bicycle&date=${startDate}&end=${endDate}`);
+        let urlTraffic = `https://corsproxy.io/?` + encodeURIComponent(`https://api.glasgow.gov.uk/traffic/v1/movement/query?start=${startDate}&end=${endDate}&period=Day`);
 
         if (dataType === 'pedestrian') {
             url = urlPedestrian;
@@ -22,9 +22,9 @@ class Model {
         try {
             const response = await fetch(url, {method: 'GET'});
             if (!response.ok) {
-                throw new Error('API request did not go through')
+                window.alert("Cannot connect to the Glasgow Open Data Hub, please try your request later.")
             }
-            data = await response.json();
+           let data = await response.json();
 
             if (dataType === 'cyclist') {
                 data = await this.locationOfSensors(data, dataType);

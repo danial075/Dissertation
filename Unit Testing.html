@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<!-- saved from url=(0068)https://devweb2023.cis.strath.ac.uk/~rgb20145/finalproject/Test.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Unit Testing </title>
+  <!-- Link to Leaflet CSS -->
+  <link rel="stylesheet" href="./Unit Testing_files/leaflet.css" crossorigin="">
+  <!-- Link to Leaflet JavaScript -->
+  <script src="./Unit Testing_files/leaflet.js" crossorigin=""></script>
+  <!-- Link to Chart JavaScript -->
+  <script src="./Unit Testing_files/chart.js"></script>
+  <script src="./Unit Testing_files/chartjs-plugin-datalabels@latest"></script>
+  <!-- Link to download pdf chart JavaScript -->
+  <script src="./Unit Testing_files/jspdf.umd.min.js"></script>
+  <!--    Bootstrap CSS stylesheet-->
+  <link href="./Unit Testing_files/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <!--    Needed for the navbar icons-->
+  <link rel="stylesheet" href="./Unit Testing_files/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+  <link rel="stylesheet" type="text/css" href="./Unit Testing_files/Page-style.css">
+
+
+</head>
+
+<body>
+
+  <h1> Glasgow on the Go Test runner</h1>
+
+<div class="container-fluid page-info">
+
+</div>
+<!-- Container for test results -->
+<div id="testResults"><p style="color: green;">Model should be instantiated: passed</p><p style="color: green;">View should be instantiated: passed</p><p style="color: green;">Controller should be instantiated and connected to Model and View: passed</p><p style="color: green;">Date validation should fail for 'invalid-date': passed</p><p style="color: green;">Future date validation should fail for '2999-12-31': passed</p><p style="color: green;">Start date should be before end date validation: passed</p><p style="color: green;">Valid API call should return data: passed</p><p style="color: green;">Valid API call for traffic data should return data: passed</p><p style="color: green;">Valid API call for cyclist data should return data: passed</p><p style="color: green;">GeoJSON conversion should work for pedestrian data: passed</p><p style="color: green;">Graph should have the correct number of data points: passed</p><p style="color: green;">GeoJSON conversion should work for traffic data: passed</p><p style="color: green;">Graph data conversion should work for traffic data: passed</p><p style="color: green;">Future date validation for traffic data should fail: passed</p><p style="color: green;">GeoJSON conversion should work for cyclist data: passed</p><p style="color: green;">Graph data conversion should work for cyclist data: passed</p><p style="color: green;">Future date validation for cyclist data should fail: passed</p></div>
+
+
+
+
+<form id="settingDateParameters" hidden="">
+  <div id="startToEnd">
+
+    <label for="startDate" class="form-label">Start Date</label>
+    <input type="date" class="form-control" id="startDate" placeholder="start date">
+
+
+    <label for="endDate" class="form-label">End Date</label>
+    <input type="date" class="form-control" id="endDate" placeholder="end date">
+  </div>
+
+
+  <div class="form-check form-switch hideZeroCheck">
+    <label class="form-check-label " for="hideZeroCounts">Hide Zero Counts</label>
+    <input class="form-check-input" type="checkbox" id="hideZeroCounts" disabled="">
+  </div>
+
+  <div class="selectBox">
+    <label for="topResultsDropdown" class="filter-results-label">Filter Results</label>
+    <select class="form-select form-select-lg mb-2" id="topResultsDropdown" aria-label=".form-select-lg example" disabled="">
+      <option value="top-5">Top 5</option>
+      <option value="top-10">Top 10</option>
+      <option value="top-15">Top 15</option>
+      <option value="top-20">Top 20</option>
+      <option value="all" selected="">All</option>
+    </select>
+  </div>
+
+  <button class="btn-lg btn-xl" id="submitButton">
+    <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+    <span class="visually-hidden">Loading...</span>
+    Get Data
+  </button>
+
+
+</form>
+
+
+<div class="container">
+
+  <div class="row">
+    <div class="col">
+      <canvas id="glasgowGraph" aria-label="Glasgow Graph" hidden="" height="527" style="display: block; box-sizing: border-box; height: 263px; width: 527px;" width="1054"></canvas>
+    </div>
+  </div>
+
+  <div class="row">
+    <button id="imageButton" hidden="">Download Image</button>
+    <button id="pdfButton" hidden="">PDF download</button>
+
+  </div>
+
+  <div id="glasgowMap" hidden="" class="leaflet-container leaflet-touch leaflet-retina leaflet-fade-anim leaflet-grab leaflet-touch-drag leaflet-touch-zoom" tabindex="0" style="position: relative;"><div class="leaflet-pane leaflet-map-pane" style="transform: translate3d(0px, 0px, 0px);"><div class="leaflet-pane leaflet-tile-pane"><div class="leaflet-layer " style="z-index: 1; opacity: 1;"><div class="leaflet-tile-container leaflet-zoom-animated" style="z-index: 18; transform: translate3d(0px, 0px, 0px) scale(1);"><img alt="" role="presentation" src="./Unit Testing_files/2556.png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; backface-visibility: hidden; transform: translate3d(-63px, -115px, 0px); opacity: 1;"></div></div></div><div class="leaflet-pane leaflet-shadow-pane"></div><div class="leaflet-pane leaflet-overlay-pane"></div><div class="leaflet-pane leaflet-marker-pane"></div><div class="leaflet-pane leaflet-tooltip-pane"></div><div class="leaflet-pane leaflet-popup-pane"></div><div class="leaflet-proxy leaflet-zoom-animated" style="transform: translate3d(1.02381e+06px, 654451px, 0px) scale(4096);"></div></div><div class="leaflet-control-container"><div class="leaflet-top leaflet-left"><div class="leaflet-control-zoom leaflet-bar leaflet-control"><a class="leaflet-control-zoom-in" href="https://devweb2023.cis.strath.ac.uk/~rgb20145/finalproject/Test.html#" title="Zoom in" role="button" aria-label="Zoom in">+</a><a class="leaflet-control-zoom-out" href="https://devweb2023.cis.strath.ac.uk/~rgb20145/finalproject/Test.html#" title="Zoom out" role="button" aria-label="Zoom out">−</a></div></div><div class="leaflet-top leaflet-right"></div><div class="leaflet-bottom leaflet-left"></div><div class="leaflet-bottom leaflet-right"><div class="leaflet-control-attribution leaflet-control"><a href="https://leafletjs.com/" title="A JS library for interactive maps">Leaflet</a> | Map data © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors</div></div></div></div>
+</div>
+
+
+
+<script src="./Unit Testing_files/bootstrap.bundle.min.js"></script>
+<script src="./Unit Testing_files/Model.js"></script>
+<script src="./Unit Testing_files/View.js"></script>
+<script src="./Unit Testing_files/Controller.js"></script>
+<script src="./Unit Testing_files/unit-testing.js"></script>
+
+
+</body></html>
